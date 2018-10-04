@@ -31,3 +31,38 @@ C:\Users\André Pinto\Documents\Visual Studio 2015\Projetos\scrum_Grupo2_website
 C:\Users\André Pinto\Documents\Visual Studio 2015\Projetos\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.csprojResolveAssemblyReference.cache
 C:\Users\André Pinto\Documents\Visual Studio 2015\Projetos\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.dll
 C:\Users\André Pinto\Documents\Visual Studio 2015\Projetos\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.pdb
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\ApplicationInsights.config
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\csc.exe
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\System.Collections.Immutable.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\System.Reflection.Metadata.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\vbc.exe
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\VBCSCompiler.exe
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\roslyn\VBCSCompiler.exe.config
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\scrum_Grupo2_website.dll.config
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\scrum_Grupo2_website.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\scrum_Grupo2_website.pdb
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.Agent.Intercept.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.DependencyCollector.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.Web.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.WindowsServer.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.ApplicationInsights.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.DependencyCollector.xml
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.Web.xml
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.AI.WindowsServer.xml
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.ApplicationInsights.xml
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.csprojAssemblyReference.cache
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.csproj.CoreCompileInputs.cache
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.csproj.CopyComplete
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.dll
+C:\BertoDocs\IM\3ºAno\1ºSemestre\Engenharia Software\Scrum_Grupo2\scrum_Grupo2_website\scrum_Grupo2_website\obj\Debug\scrum_Grupo2_website.pdb
