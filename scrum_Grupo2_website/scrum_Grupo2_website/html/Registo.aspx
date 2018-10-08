@@ -21,16 +21,34 @@
         <div style="height: 590px; margin: 0 auto; width: 520px;">
             <h1>Registo</h1>
             <p>Insira os dados para criar a sua conta.</p>
-            <label for="nome"><b>Nome</b></label>
+            <label for="nome"><b>Nome:</b></label>
             <asp:TextBox type="text" ID="txtbox_nome" runat="server" placeholder="Insira Nome" name="nome"></asp:TextBox>
 
-            <label for="email"><b>Email</b></label>
-            <asp:TextBox type="text" ID="txtbox_email" runat="server" placeholder="Insira Email" name="email"></asp:TextBox>
+            <label><b>Numero de Utente:</b></label>
+            <asp:TextBox type="text" ID="TextBox_numeroutente" runat="server" placeholder="Insira Numero de Utente" name="numero_utente"></asp:TextBox>
 
-            <label for="psw"><b>Password</b></label>
+            <p>
+            <label><b>Data de Nascimento:</b></label>
+            <asp:Calendar ID="Calendar_datanascimento" runat="server"></asp:Calendar>
+            </p>
+
+            <label><b>Sexo:</b></label>
+            <p>
+                <asp:DropDownList ID="DropDownList_Sexo" runat="server">
+                    <asp:ListItem>Masculino</asp:ListItem>
+                    <asp:ListItem>Feminino</asp:ListItem>
+                </asp:DropDownList>
+            </p>
+            <label for="email"><b>Email:</b></label>
+            <asp:TextBox type="text" ID="txtbox_email" runat="server" placeholder="Insira Email" name="email"></asp:TextBox>
+            
+            <label for="morada"><b>Morada:</b></label>
+            <asp:TextBox type="text" ID="TextBox_morada" runat="server" placeholder="Insira Morada" name="morada"></asp:TextBox>
+
+            <label for="psw"><b>Password:</b></label>
             <asp:TextBox type="password" ID="txtbox_pass" runat="server" placeholder="Insira Password" name="psw"></asp:TextBox>
 
-            <label for="psw-repeat"><b>Repita Password</b></label>
+            <label for="psw-repeat"><b>Repita Password:</b></label>
             <asp:TextBox type="password" ID="txtbox_repass" runat="server" placeholder="Insira Password" name="psw-repeat"></asp:TextBox>
 
             <asp:Button type="submit" ID="btn_registar" class="registerbtn" runat="server" Text="Criar" OnClick="btn_registar_Click" />

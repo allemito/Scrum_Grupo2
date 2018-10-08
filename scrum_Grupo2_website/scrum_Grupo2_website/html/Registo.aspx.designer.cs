@@ -76,6 +76,33 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox txtbox_nome;
         
         /// <summary>
+        /// TextBox_numeroutente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_numeroutente;
+        
+        /// <summary>
+        /// Calendar_datanascimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar Calendar_datanascimento;
+        
+        /// <summary>
+        /// DropDownList_Sexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Sexo;
+        
+        /// <summary>
         /// txtbox_email control.
         /// </summary>
         /// <remarks>
@@ -83,6 +110,15 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtbox_email;
+        
+        /// <summary>
+        /// TextBox_morada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_morada;
         
         /// <summary>
         /// txtbox_pass control.

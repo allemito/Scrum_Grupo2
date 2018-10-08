@@ -16,7 +16,8 @@ namespace scrum_Grupo2_website.html
 
         protected void btn_registar_Click(object sender, EventArgs e)
         {
-
+            /*callendar.selecteddate.toshortdatestring()  Serve para tirar o valor do callendar para inserir na BD*/
+            /*DropDownList_Sexo.SelectedItem.ToString(); Serve para tirar o sexo da droplist */
         }
     }
 }
