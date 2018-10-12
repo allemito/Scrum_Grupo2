@@ -99,7 +99,9 @@
     <Content Include="html\Contactos.aspx" />
     <Content Include="html\Faq.aspx" />
     <Content Include="html\Login.aspx" />
-    <Content Include="html\Registo.aspx" />
+    <Content Include="html\RegistoMedico.aspx" />
+    <Content Include="html\RegistoPrincipal.aspx" />
+    <Content Include="html\RegistoUtente.aspx" />
     <Content Include="image\heart-health-main.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -147,12 +149,26 @@
     <Compile Include="html\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="html\Registo.aspx.cs">
-      <DependentUpon>Registo.aspx</DependentUpon>
+    <Compile Include="html\RegistoMedico.aspx.cs">
+      <DependentUpon>RegistoMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="html\Registo.aspx.designer.cs">
-      <DependentUpon>Registo.aspx</DependentUpon>
+    <Compile Include="html\RegistoMedico.aspx.designer.cs">
+      <DependentUpon>RegistoMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="html\RegistoPrincipal.aspx.cs">
+      <DependentUpon>RegistoPrincipal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="html\RegistoPrincipal.aspx.designer.cs">
+      <DependentUpon>RegistoPrincipal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="html\RegistoUtente.aspx.cs">
+      <DependentUpon>RegistoUtente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="html\RegistoUtente.aspx.designer.cs">
+      <DependentUpon>RegistoUtente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
