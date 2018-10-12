@@ -14,6 +14,8 @@ namespace scrum_Grupo2_website.html
         OracleConnection conexao = new OracleConnection("DATA SOURCE=localhost:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
         OracleCommand comando = new OracleCommand();
         OracleDataReader dataReader;
+        public string id_number;
+        public int i;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,6 +52,7 @@ namespace scrum_Grupo2_website.html
             {
 
             }
+
         }
     }
 }

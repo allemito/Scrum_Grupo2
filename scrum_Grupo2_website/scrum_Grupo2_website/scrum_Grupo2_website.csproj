@@ -97,11 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\StyleSheet.css" />
+    <Content Include="html\Administrador.aspx" />
     <Content Include="html\Contactos.aspx" />
     <Content Include="html\Faq.aspx" />
     <Content Include="html\Login.aspx" />
     <Content Include="html\RegistoMedico.aspx" />
-    <Content Include="html\RegistoPrincipal.aspx" />
     <Content Include="html\RegistoUtente.aspx" />
     <Content Include="image\heart-health-main.jpg" />
     <Content Include="packages.config" />
@@ -122,6 +122,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="html\Administrador.aspx.cs">
+      <DependentUpon>Administrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="html\Administrador.aspx.designer.cs">
+      <DependentUpon>Administrador.aspx</DependentUpon>
+    </Compile>
     <Compile Include="html\Contactos.aspx.cs">
       <DependentUpon>Contactos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -156,13 +163,6 @@
     </Compile>
     <Compile Include="html\RegistoMedico.aspx.designer.cs">
       <DependentUpon>RegistoMedico.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="html\RegistoPrincipal.aspx.cs">
-      <DependentUpon>RegistoPrincipal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="html\RegistoPrincipal.aspx.designer.cs">
-      <DependentUpon>RegistoPrincipal.aspx</DependentUpon>
     </Compile>
     <Compile Include="html\RegistoUtente.aspx.cs">
       <DependentUpon>RegistoUtente.aspx</DependentUpon>

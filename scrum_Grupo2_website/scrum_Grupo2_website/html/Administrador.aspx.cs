@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace scrum_Grupo2_website.html
 {
-    public partial class RegistoPrincipal : System.Web.UI.Page
+    public partial class Administrador : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
