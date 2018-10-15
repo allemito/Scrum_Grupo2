@@ -9,6 +9,7 @@ namespace scrum_Grupo2_website.html
 {
     public partial class RegistoUtente1 : System.Web.UI.Page
     {
+        //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('A tua prima');", true);
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -16,7 +17,7 @@ namespace scrum_Grupo2_website.html
 
         protected void btn_registar_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
