@@ -76,13 +76,13 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox txtbox_nome;
         
         /// <summary>
-        /// TextBox_numeroutente control.
+        /// TextBox_Contribuinte control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_numeroutente;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Contribuinte;
         
         /// <summary>
         /// Calendar_datanascimento control.
@@ -112,15 +112,6 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox txtbox_cedula;
         
         /// <summary>
-        /// txtbox_email control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtbox_email;
-        
-        /// <summary>
         /// TextBox_morada control.
         /// </summary>
         /// <remarks>
@@ -130,22 +121,13 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox TextBox_morada;
         
         /// <summary>
-        /// txtbox_pass_med control.
+        /// txtbox_email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtbox_pass_med;
-        
-        /// <summary>
-        /// txtbox_repass_med control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtbox_repass_med;
+        protected global::System.Web.UI.WebControls.TextBox txtbox_email;
         
         /// <summary>
         /// btn_registar control.

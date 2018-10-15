@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
+using System.Text;
 
 namespace scrum_Grupo2_website.html
 {
@@ -20,14 +21,53 @@ namespace scrum_Grupo2_website.html
             comando.Connection = conexao;
         }
 
+        public string CreatePassword(int lenght)
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder password = new StringBuilder();
+            Random aleatorio = new Random();
+            while (0 < lenght--)
+            {
+                password.Append(valid[aleatorio.Next(valid.Length)]);
+            }
+            return password.ToString();
+        }
+
         protected void btn_registar_Click(object sender, EventArgs e)
         {
+            if (txtbox_nome.Text != "" & txtbox_email.Text != "" & TextBox_morada.Text != "" & TextBox_Contribuinte.Text != "" & DropDownList_Sexo.Text != "" & Calendar_datanascimento.SelectedDate != null & txtbox_cedula.Text != "")
+                {
+                string ano;
+                string mes;
+                string dia;
+                string dataNascimento;
+                string novaPassword = CreatePassword(10);
 
-        }
+                ano = Calendar_datanascimento.SelectedDate.Year.ToString();
+                mes = Calendar_datanascimento.SelectedDate.Month.ToString();
+                dia = Calendar_datanascimento.SelectedDate.Day.ToString();
+                dataNascimento = ano + "." + mes + "." + dia;
+                conexao.Open();
+                comando.CommandText = "INSERT INTO Medico(ID_Medico, Nome_Medico, Data_Nascimento_Medico, Morada_Medico, Numero_Cedula, Genero_Medico, Contribuinte_Medico, Email_Medico, Password_Medico) VALUES ('" + 122345634 + "', '" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + txtbox_cedula.Text + "', '" + DropDownList_Sexo.Text + "', '" + TextBox_Contribuinte.Text + "', '" + txtbox_email.Text + "', '" + novaPassword + "')";
+                comando.ExecuteNonQuery();
+                conexao.Close();
 
-        protected void txtbox_nome_TextChanged(object sender, EventArgs e)
-        {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Senha do Médico: " + novaPassword + "');", true);
 
-        }
+                txtbox_nome.Text = "";
+                txtbox_email.Text = "";
+                TextBox_morada.Text = "";
+                TextBox_Contribuinte.Text = "";
+                txtbox_cedula.Text = "";
+                Calendar_datanascimento.SelectedDates.Clear(); 
+                DropDownList_Sexo.ClearSelection();
+
+                }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Preencha todos os campos por favor!');", true);
+            }
+       }
+           
     }
 }

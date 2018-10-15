@@ -16,7 +16,10 @@ namespace scrum_Grupo2_website.html
 
         protected void btn_login_account_Click(object sender, EventArgs e)
         {
-          
+          if (txtbox_username.Text == "admin" & txtbox_password.Text == "admin")
+            {
+                Response.Redirect("~/html/Administrador.aspx");
+            }
         }
     }
 }

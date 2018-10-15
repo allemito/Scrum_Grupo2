@@ -13,7 +13,7 @@
     <form id="form1" runat="server" style="margin: auto">
         <ul class="topnav">
             <asp:Button class="button" ID="Button1" runat="server" Text="Home" PostBackUrl="~/html/homepage.aspx" />
-            <asp:Button class="button" ID="btn_registo" runat="server" Text="Registo" PostBackUrl="~/html/RegistoPrincipal.aspx" />
+            <asp:Button class="button" ID="btn_registo" runat="server" Text="Registo" PostBackUrl="~/html/RegistoUtente.aspx" />
             <asp:Button class="button" ID="btn_login" runat="server" Text="Login" PostBackUrl="~/html/Login.aspx" />
             <asp:Button class="button" ID="btn_faq" runat="server" Text="F.A.Q" PostBackUrl="~/html/Faq.aspx" />
             <asp:Button class="button" ID="btn_contactos" runat="server" Text="Contactos" PostBackUrl="~/html/Contactos.aspx" />
