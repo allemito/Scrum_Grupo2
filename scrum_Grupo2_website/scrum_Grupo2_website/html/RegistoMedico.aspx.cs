@@ -37,6 +37,7 @@ namespace scrum_Grupo2_website.html
         {
             if (txtbox_nome.Text != "" & txtbox_email.Text != "" & TextBox_morada.Text != "" & TextBox_Contribuinte.Text != "" & DropDownList_Sexo.Text != "" & Calendar_datanascimento.SelectedDate != null & txtbox_cedula.Text != "")
                 {
+                int novoID;
                 string ano;
                 string mes;
                 string dia;
@@ -47,8 +48,21 @@ namespace scrum_Grupo2_website.html
                 mes = Calendar_datanascimento.SelectedDate.Month.ToString();
                 dia = Calendar_datanascimento.SelectedDate.Day.ToString();
                 dataNascimento = ano + "." + mes + "." + dia;
-                conexao.Open();
-                comando.CommandText = "INSERT INTO Medico(ID_Medico, Nome_Medico, Data_Nascimento_Medico, Morada_Medico, Numero_Cedula, Genero_Medico, Contribuinte_Medico, Email_Medico, Password_Medico) VALUES ('" + 122345634 + "', '" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + txtbox_cedula.Text + "', '" + DropDownList_Sexo.Text + "', '" + TextBox_Contribuinte.Text + "', '" + txtbox_email.Text + "', '" + novaPassword + "')";
+
+                try
+                {
+                    conexao.Open();
+                    comando.CommandText = "SELECT MAX(ID_Medico)+1 from Medico";
+                    comando.ExecuteNonQuery();
+                    novoID = Convert.ToInt32(comando.ExecuteScalar());
+                }
+                catch (System.InvalidCastException)
+                {
+
+                    novoID = 1;
+                }
+
+                comando.CommandText = "INSERT INTO Medico(ID_Medico, Nome_Medico, Data_Nascimento_Medico, Morada_Medico, Numero_Cedula, Genero_Medico, Contribuinte_Medico, Email_Medico, Password_Medico) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + txtbox_cedula.Text + "', '" + DropDownList_Sexo.Text + "', '" + TextBox_Contribuinte.Text + "', '" + txtbox_email.Text + "', '" + novaPassword + "')";
                 comando.ExecuteNonQuery();
                 conexao.Close();
 

@@ -29,6 +29,7 @@ namespace scrum_Grupo2_website.html
 
                 if (txtbox_nome.Text != "" & txtbox_email.Text != "" & TextBox_morada.Text != "" & TextBox_numeroutente.Text != "" & DropDownList_Sexo.Text != "" & Calendar_datanascimento.SelectedDate != null)
                 {
+                    int novoID;
                     string ano;
                     string mes;
                     string dia;
@@ -39,8 +40,20 @@ namespace scrum_Grupo2_website.html
                     dia = Calendar_datanascimento.SelectedDate.Day.ToString();
                     dataNascimento = ano + "." + mes + "." + dia;
 
-                    conexao.Open();
-                    comando.CommandText = "INSERT INTO Doente(ID_Doente, Nome_Doente, Data_Nascimento_Doente, Morada, Numero_Utente, Genero, Password_Doente) VALUES ('" + 123456789 + "', '" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + TextBox_numeroutente.Text + "', '" + DropDownList_Sexo.Text + "', '" + txtbox_repass.Text + "')";
+                    try
+                    {
+                        conexao.Open();
+                        comando.CommandText = "SELECT MAX(ID_Doente)+1 from Doente";
+                        comando.ExecuteNonQuery();
+                        novoID = Convert.ToInt32(comando.ExecuteScalar());
+                    }
+                    catch (System.InvalidCastException)
+                    {
+
+                        novoID = 1;
+                    }
+
+                    comando.CommandText = "INSERT INTO Doente(ID_Doente, Nome_Doente, Data_Nascimento_Doente, Morada, Numero_Utente, Genero, Password_Doente) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + TextBox_numeroutente.Text + "', '" + DropDownList_Sexo.Text + "', '" + txtbox_repass.Text + "')";
                     comando.ExecuteNonQuery();
                     conexao.Close();
 
