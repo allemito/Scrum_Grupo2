@@ -12,76 +12,77 @@ namespace scrum_Grupo2_website.html
 {
     public partial class RegistoMedico1 : System.Web.UI.Page
     {
+        // Ligação base dados oracle
         OracleConnection conexao = new OracleConnection("DATA SOURCE=localhost:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
         OracleCommand comando = new OracleCommand();
         OracleDataReader dataReader;
 
+        // Acdeder à Classe Registo
+        Registo registo = new Registo();
+
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {       
             comando.Connection = conexao;
         }
-
-        public string CreatePassword(int lenght)
-        {
-            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            StringBuilder password = new StringBuilder();
-            Random aleatorio = new Random();
-            while (0 < lenght--)
-            {
-                password.Append(valid[aleatorio.Next(valid.Length)]);
-            }
-            return password.ToString();
-        }
-
+ 
         protected void btn_registar_Click(object sender, EventArgs e)
         {
-            if (txtbox_nome.Text != "" & txtbox_email.Text != "" & TextBox_morada.Text != "" & TextBox_Contribuinte.Text != "" & DropDownList_Sexo.Text != "" & Calendar_datanascimento.SelectedDate != null & txtbox_cedula.Text != "")
+            if (txtbox_nome.Text != "" & TextBox_morada.Text != "" & TextBox_Contribuinte.Text != "" & DropDownList_Sexo.Text != "" & Calendar_datanascimento.SelectedDate != null & txtbox_cedula.Text != "")
+            {
+                if (DateTime.Now > Calendar_datanascimento.SelectedDate)
                 {
-                int novoID;
-                string ano;
-                string mes;
-                string dia;
-                string dataNascimento;
-                string novaPassword = CreatePassword(10);
+                    if (registo.verificarEmail(txtbox_email.Text) == true)
+                    {
+                        // Gerar password Aleatoria 
+                        string novaPassword = registo.CreatePassword(10);
 
-                ano = Calendar_datanascimento.SelectedDate.Year.ToString();
-                mes = Calendar_datanascimento.SelectedDate.Month.ToString();
-                dia = Calendar_datanascimento.SelectedDate.Day.ToString();
-                dataNascimento = ano + "." + mes + "." + dia;
-                
-                try
+                        // Calcular data nascimento para inserir na base de dados
+                        string dataNascimento = registo.CriarNascimentoDataBase(Calendar_datanascimento.SelectedDate.Year.ToString(), Calendar_datanascimento.SelectedDate.Month.ToString(), Calendar_datanascimento.SelectedDate.Day.ToString());
+
+                        // Criar ID para medico incremental
+                        int novoID;
+                        try
+                        {
+                            conexao.Open();
+                            comando.CommandText = "SELECT MAX(ID_Medico)+1 from Medico";
+                            comando.ExecuteNonQuery();
+                            novoID = Convert.ToInt32(comando.ExecuteScalar());
+                        }
+                        catch (System.InvalidCastException)
+                        {
+                            novoID = 1;
+                        }
+
+                        // Inserir dados na Base de Dados
+                        comando.CommandText = "INSERT INTO Medico(ID_Medico, Nome_Medico, Data_Nascimento_Medico, Morada_Medico, Numero_Cedula, Genero_Medico, Contribuinte_Medico, Email_Medico, Password_Medico) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + txtbox_cedula.Text + "', '" + DropDownList_Sexo.Text + "', '" + TextBox_Contribuinte.Text + "', '" + txtbox_email.Text + "', '" + novaPassword + "')";
+                        comando.ExecuteNonQuery();
+                        conexao.Close();
+
+                        // Limpar Textbox apos registo do médico
+                        txtbox_nome.Text = "";
+                        txtbox_email.Text = "";
+                        TextBox_morada.Text = "";
+                        TextBox_Contribuinte.Text = "";
+                        txtbox_cedula.Text = "";
+                        Calendar_datanascimento.SelectedDates.Clear();
+                        DropDownList_Sexo.ClearSelection();
+
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo Concluido com sucesso!');", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Email inválido, por favor verifique novamente!');", true);
+                    }
+                }
+                else
                 {
-                    conexao.Open();
-                    comando.CommandText = "SELECT MAX(ID_Medico)+1 from Medico";
-                    comando.ExecuteNonQuery();
-                    novoID = Convert.ToInt32(comando.ExecuteScalar());
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Data de nascimento inválida, por favor verifique novamente!');", true);
                 }
-                catch (System.InvalidCastException)
-                {
-
-                    novoID = 1;
-                }
-
-                comando.CommandText = "INSERT INTO Medico(ID_Medico, Nome_Medico, Data_Nascimento_Medico, Morada_Medico, Numero_Cedula, Genero_Medico, Contribuinte_Medico, Email_Medico, Password_Medico) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + txtbox_cedula.Text + "', '" + DropDownList_Sexo.Text + "', '" + TextBox_Contribuinte.Text + "', '" + txtbox_email.Text + "', '" + novaPassword + "')";
-                comando.ExecuteNonQuery();
-                conexao.Close();
-
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Senha do Médico: " + novaPassword + "');", true);
-
-                txtbox_nome.Text = "";
-                txtbox_email.Text = "";
-                TextBox_morada.Text = "";
-                TextBox_Contribuinte.Text = "";
-                txtbox_cedula.Text = "";
-                Calendar_datanascimento.SelectedDates.Clear(); 
-                DropDownList_Sexo.ClearSelection();
-
-                }
+            }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Preencha todos os campos por favor!');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos');", true);
             }
-       }
-           
+       }          
     }
 }
