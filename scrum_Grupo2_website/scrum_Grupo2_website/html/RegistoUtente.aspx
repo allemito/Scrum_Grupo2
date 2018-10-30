@@ -12,7 +12,6 @@
     <form id="form1" runat="server" style="margin: auto">
         <ul class="topnav">
             <asp:Button class="button" ID="btn_home" runat="server" Text="Home" PostBackUrl="~/html/homepage.aspx" />
-            <asp:Button class="button" ID="btn_registo" runat="server" Text="Registo" PostBackUrl="~/html/RegistoUtente.aspx" />
             <asp:Button class="button" ID="btn_login" runat="server" Text="Login" PostBackUrl="~/html/Login.aspx" />
             <asp:Button class="button" ID="btn_faq" runat="server" Text="F.A.Q" PostBackUrl="~/html/Faq.aspx" />
             <asp:Button class="button" ID="btn_contactos" runat="server" Text="Contactos" PostBackUrl="~/html/Contactos.aspx" />
@@ -29,11 +28,10 @@
             <label><b>Número de Utente:</b></label>
             <asp:TextBox type="text" ID="TextBox_numeroutente" runat="server" placeholder="Número de Utente" name="numero_utente"></asp:TextBox>
 
-            <p>
-            <label><b>Data de Nascimento:</b></label>
-            <asp:Calendar ID="Calendar_datanascimento" runat="server"></asp:Calendar>
+            <p><label><b>Data de Nascimento:</b></label> 
+            <asp:Calendar ID="Calendar_datanascimento" runat="server" AutoPostBack = "false"></asp:Calendar>
             </p>
-
+           
             <label><b>Género:</b></label>
             <p>
                 <asp:DropDownList ID="DropDownList_Sexo" runat="server">
@@ -46,12 +44,6 @@
 
             <label for="email"><b>Email:</b></label>
             <asp:TextBox type="text" ID="txtbox_email" runat="server" placeholder="Email" name="email"></asp:TextBox>
-
-            <label for="psw"><b>Password:</b></label>
-            <asp:TextBox type="password" ID="txtbox_pass" runat="server" placeholder="Password" name="psw"></asp:TextBox>
-
-            <label for="psw-repeat"><b>Confirmar a Password:</b></label>
-            <asp:TextBox type="password" ID="txtbox_repass" runat="server" placeholder="Confirmar Password" name="psw-repeat"></asp:TextBox>
 
             <asp:Button type="submit" ID="btn_registar" class="registerbtn" runat="server" Text="Criar" OnClick="btn_registar_Click" />
         </div>

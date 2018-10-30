@@ -31,15 +31,6 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Button btn_home;
         
         /// <summary>
-        /// btn_registo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_registo;
-        
-        /// <summary>
         /// btn_login control.
         /// </summary>
         /// <remarks>
@@ -119,24 +110,6 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtbox_email;
-        
-        /// <summary>
-        /// txtbox_pass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtbox_pass;
-        
-        /// <summary>
-        /// txtbox_repass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtbox_repass;
         
         /// <summary>
         /// btn_registar control.

@@ -31,15 +31,6 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// btn_registo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_registo;
-        
-        /// <summary>
         /// btn_login control.
         /// </summary>
         /// <remarks>
@@ -92,5 +83,14 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_RegistarMedico;
+        
+        /// <summary>
+        /// btn_RegistoDoente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_RegistoDoente;
     }
 }

@@ -48,7 +48,7 @@ namespace scrum_Grupo2_website.html
                 mes = Calendar_datanascimento.SelectedDate.Month.ToString();
                 dia = Calendar_datanascimento.SelectedDate.Day.ToString();
                 dataNascimento = ano + "." + mes + "." + dia;
-
+                
                 try
                 {
                     conexao.Open();
