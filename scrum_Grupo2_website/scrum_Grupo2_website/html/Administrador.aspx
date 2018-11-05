@@ -13,20 +13,14 @@
     <form id="form1" runat="server" style="margin: auto">
         <ul class="topnav">
             <asp:Button class="button" ID="Button1" runat="server" Text="Home" PostBackUrl="~/html/homepage.aspx" />
-            <asp:Button class="button" ID="btn_login" runat="server" Text="Login" PostBackUrl="~/html/Login.aspx" />
+            <asp:Button class="button" ID="btn_paginaInicial" runat="server" Text="Página Inicial" PostBackUrl="~/html/Administrador.aspx"/>
             <asp:Button class="button" ID="btn_faq" runat="server" Text="F.A.Q" PostBackUrl="~/html/Faq.aspx" />
             <asp:Button class="button" ID="btn_contactos" runat="server" Text="Contactos" PostBackUrl="~/html/Contactos.aspx" />
         </ul>
         <img src="../image/saude.jpg" class="background-image"/>
         <div style="margin:auto;">
             <p>
-            <asp:Button class="button" ID="btn_ListarDoentes" runat="server" Text="Lista de Doentes" PostBackUrl="~/html/Administrador.aspx" Width="217px" /> <!-- ainda falta atribuir uma pagina para quando o botao for clicado no 'postbackurl'-->
-            </p>
-            <p>
-            <asp:Button class="button" ID="btn_ListarMedicos" runat="server" Text="Lista de Médicos" PostBackUrl="~/html/Administrador.aspx" Width="217px" /> <!-- ainda falta atribuir uma pagina para quando o botao for clicado no 'postbackurl'-->
-            </p>
-            <p>
-            <asp:Button class="button" ID="btn_RegistarMedico" runat="server" Text="Registar Médico" PostBackUrl="~/html/RegistoMedico.aspx" Width="217px" />
+            <asp:Button class="button" ID="btn_RegistarMedico" runat="server" Text="Registar Médico" PostBackUrl="~/html/RegistoMedico.aspx" Width="217px"/>
             </p>
             <p>
             <asp:Button class="button" ID="btn_RegistoDoente" runat="server" Text="Registar Doente" PostBackUrl="~/html/RegistoUtente.aspx" Width="217px" />

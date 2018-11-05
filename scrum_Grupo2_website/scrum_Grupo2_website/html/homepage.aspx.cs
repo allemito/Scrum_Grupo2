@@ -13,5 +13,10 @@ namespace scrum_Grupo2_website
         {
 
         }
+
+        protected void btn_registar_Click(object sender, EventArgs e)
+        {
+            label_evento.Text = Calendar_Evento.SelectedDate.ToShortDateString();
+        }
     }
 }

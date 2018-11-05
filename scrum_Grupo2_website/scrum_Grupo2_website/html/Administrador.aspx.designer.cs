@@ -31,13 +31,13 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// btn_login control.
+        /// btn_paginaInicial control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_login;
+        protected global::System.Web.UI.WebControls.Button btn_paginaInicial;
         
         /// <summary>
         /// btn_faq control.
@@ -56,24 +56,6 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_contactos;
-        
-        /// <summary>
-        /// btn_ListarDoentes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_ListarDoentes;
-        
-        /// <summary>
-        /// btn_ListarMedicos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_ListarMedicos;
         
         /// <summary>
         /// btn_RegistarMedico control.

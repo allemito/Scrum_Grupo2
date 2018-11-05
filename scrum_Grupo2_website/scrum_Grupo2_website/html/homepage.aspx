@@ -17,6 +17,16 @@
             <asp:Button class="button" ID="btn_contactos" runat="server" Text="Contactos" PostBackUrl="~/html/Contactos.aspx" />
         </ul>
         <img src="../image/heart-health-main.jpg" class="background-image" />
+
+        <div style="height: 590px; margin: 0 auto; width: 520px;">
+            <p>
+                <asp:Calendar ID="Calendar_Evento" runat="server" Height ="222px" Width="519px"></asp:Calendar>
+            </p>
+            <p>
+                <asp:Label ID ="label_evento" runat="server"></asp:Label>
+            </p> 
+             <asp:Button type="submit" ID="btn_registar" class="registerbtn" runat="server" Text="Registar" OnClick="btn_registar_Click" />
+        </div>
     </form>
 </body>
 </html>

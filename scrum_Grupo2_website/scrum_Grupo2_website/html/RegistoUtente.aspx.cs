@@ -8,6 +8,7 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Net.Mail;
 
 namespace scrum_Grupo2_website.html
 {
@@ -59,6 +60,9 @@ namespace scrum_Grupo2_website.html
                         comando.ExecuteNonQuery();
                         conexao.Close();
 
+                        // Enviar Email de Registo
+                        registo.EnviarEmail(txtbox_email.Text, txtbox_nome.Text, novaPassword);
+
                         // Limpar as textbox apos registo de doente
                         txtbox_nome.Text = "";
                         txtbox_email.Text = "";
@@ -66,7 +70,7 @@ namespace scrum_Grupo2_website.html
                         TextBox_numeroutente.Text = "";
                         Calendar_datanascimento.SelectedDates.Clear();
                         DropDownList_Sexo.ClearSelection();
-
+                   
                         ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo Conluido com sucesso!');", true);
                     }
                     else
