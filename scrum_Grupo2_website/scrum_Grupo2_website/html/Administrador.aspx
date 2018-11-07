@@ -20,11 +20,13 @@
         <ul class="leftbar">
             <asp:Button class="buttonleftbar" ID="btn_RegistarMedico" runat="server" Text="Registar Médico" PostBackUrl="~/html/RegistoMedico.aspx" Width ="150px"/>
             <asp:Button class="buttonleftbar" ID="btn_RegistoDoente" runat="server" Text="Registar Doente" PostBackUrl="~/html/RegistoUtente.aspx" Width ="150px"/>
-            <asp:TextBox type="text" ID="TextBox_Procurar" runat="server" placeholder="Número de Utente" name="numero_utente" Width ="150px"></asp:TextBox>
-            <asp:Button class="buttonleftbar" ID="ButtonProcurar" runat="server" Text="Procurar" Width ="150px"/>     
+            <asp:Button class="buttonleftbar" ID="ButtonProcurar" runat="server" Text="Procurar" Width ="150px" OnClick="ButtonProcurar_Click"/> 
+            <asp:TextBox type="text" ID="TextBox_Procurar" runat="server" placeholder="Número de Utente" name="numero_utente" Width ="150px"></asp:TextBox>   
+            <asp:label ID="labelProcurar" runat="server" Width ="150px" style="text-align:center" ForeColor="Red"><b></b></asp:label>          
         </ul>
-        <div style="height: 590px; margin: 0 auto; width: 450px;">
+        <div style="height: 590px; margin-left:150px; padding: 20px; border-color: lightseagreen; width: auto;">
             <asp:Button class="button" ID="ButtonEditar" runat="server" Text="Editar Dados" Width="217px" OnClick="ButtonEditar_Click" />
+            &nbsp;
             <asp:Button class="button" ID="ButtonRemover" runat="server" Text="Remover Doente" Width="217px" OnClick="ButtonRemover_Click" />
             <asp:Panel ID ="panelDoente" runat ="server">
                 <label for="nome"><b>Nome:</b></label>

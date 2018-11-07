@@ -76,6 +76,15 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Button btn_RegistoDoente;
         
         /// <summary>
+        /// ButtonProcurar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonProcurar;
+        
+        /// <summary>
         /// TextBox_Procurar control.
         /// </summary>
         /// <remarks>
@@ -85,13 +94,13 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox TextBox_Procurar;
         
         /// <summary>
-        /// ButtonProcurar control.
+        /// labelProcurar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonProcurar;
+        protected global::System.Web.UI.WebControls.Label labelProcurar;
         
         /// <summary>
         /// ButtonEditar control.
