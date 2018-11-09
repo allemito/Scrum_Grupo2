@@ -103,6 +103,7 @@
     <Content Include="html\Login.aspx" />
     <Content Include="html\RegistoMedico.aspx" />
     <Content Include="html\RegistoUtente.aspx" />
+    <Content Include="html\WebForm1.aspx" />
     <Content Include="image\heart-health-main.jpg" />
     <Content Include="image\saude.jpg" />
     <Content Include="packages.config" />
@@ -171,6 +172,13 @@
     </Compile>
     <Compile Include="html\RegistoUtente.aspx.designer.cs">
       <DependentUpon>RegistoUtente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="html\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="html\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registo.cs" />

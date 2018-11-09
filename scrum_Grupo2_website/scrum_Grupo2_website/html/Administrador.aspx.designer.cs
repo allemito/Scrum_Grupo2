@@ -103,24 +103,6 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Label labelProcurar;
         
         /// <summary>
-        /// ButtonEditar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonEditar;
-        
-        /// <summary>
-        /// ButtonRemover control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonRemover;
-        
-        /// <summary>
         /// panelDoente control.
         /// </summary>
         /// <remarks>
@@ -128,6 +110,24 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panelDoente;
+        
+        /// <summary>
+        /// ButtonEditar_Doente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonEditar_Doente;
+        
+        /// <summary>
+        /// ButtonRemover_Doente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRemover_Doente;
         
         /// <summary>
         /// txtbox_nome control.
@@ -148,13 +148,13 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox TextBox_Utente;
         
         /// <summary>
-        /// Calendar_datanascimento control.
+        /// TextBoxNascimento_Doente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar_datanascimento;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNascimento_Doente;
         
         /// <summary>
         /// DropDownList_Sexo control.
@@ -202,6 +202,24 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Panel panelMedico;
         
         /// <summary>
+        /// ButtonEditar_Medico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonEditar_Medico;
+        
+        /// <summary>
+        /// ButtonRemover_Medico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRemover_Medico;
+        
+        /// <summary>
         /// TextBox_Nome_Medico control.
         /// </summary>
         /// <remarks>
@@ -220,22 +238,22 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox TextBox_Contribuinte_Medico;
         
         /// <summary>
-        /// Calendar1 control.
+        /// TextBoxNascimento_Medico control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNascimento_Medico;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// DropDownList_Sexo_Medico control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Sexo_Medico;
         
         /// <summary>
         /// txtbox_cedula control.

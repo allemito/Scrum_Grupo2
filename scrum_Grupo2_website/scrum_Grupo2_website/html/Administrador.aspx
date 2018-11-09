@@ -25,19 +25,19 @@
             <asp:label ID="labelProcurar" runat="server" Width ="150px" style="text-align:center" ForeColor="Red"><b></b></asp:label>          
         </ul>
         <div style="height: 590px; margin-left:150px; padding: 20px; border-color: lightseagreen; width: auto;">
-            <asp:Button class="button" ID="ButtonEditar" runat="server" Text="Editar Dados" Width="217px" OnClick="ButtonEditar_Click" />
-            &nbsp;
-            <asp:Button class="button" ID="ButtonRemover" runat="server" Text="Remover Doente" Width="217px" OnClick="ButtonRemover_Click" />
             <asp:Panel ID ="panelDoente" runat ="server">
+                <asp:Button class="button" ID="ButtonEditar_Doente" runat="server" Text="Editar Dados" Width="217px" OnClick="ButtonEditar_Doente_Click"/>
+                &nbsp;
+                <asp:Button class="button" ID="ButtonRemover_Doente" runat="server" Text="Remover Doente" Width="217px" OnClick="ButtonRemover_Doente_Click"/>
+                <p></p>
                 <label for="nome"><b>Nome:</b></label>
                 <asp:TextBox type="text" ID="txtbox_nome" runat="server" placeholder="Nome" name="nome"></asp:TextBox>
 
                 <label><b>Número de Utente:</b></label>
                 <asp:TextBox type="text" ID="TextBox_Utente" runat="server" placeholder="Número de Utente" name="numero_utente"></asp:TextBox>
 
-                <p><label><b>Data de Nascimento:</b></label> 
-                <asp:Calendar ID="Calendar_datanascimento" runat="server" AutoPostBack = "false"></asp:Calendar>
-                </p>
+                <label><b>Data de Nascimento:</b></label>
+                <asp:TextBox type="text" ID="TextBoxNascimento_Doente" runat="server" placeholder="Data de Nascimento" name="data_nascimento"></asp:TextBox>
            
                 <label><b>Género:</b></label>
                 <p>
@@ -55,20 +55,22 @@
                 <asp:Button type="submit" ID="btn_Guardar_Doente" class="registerbtn" runat="server" Text="Guardar"/>
             </asp:Panel>
             <asp:Panel ID ="panelMedico" runat="server">
+                <asp:Button class="button" ID="ButtonEditar_Medico" runat="server" Text="Editar Dados" Width="217px" OnClick="ButtonEditar_Medico_Click"/>
+                &nbsp;
+                <asp:Button class="button" ID="ButtonRemover_Medico" runat="server" Text="Remover Doente" Width="217px" OnClick="ButtonRemover_Medico_Click"/>
+                <p></p>
                 <label for="nome"><b>Nome:</b></label>
                 <asp:TextBox type="text" ID="TextBox_Nome_Medico" runat="server" placeholder="Nome" name="nome"></asp:TextBox>
 
                 <label><b>Número de Contribuinte:</b></label>
                 <asp:TextBox type="text" ID="TextBox_Contribuinte_Medico" runat="server" placeholder="Número Contribuinte" name="numero_utente"></asp:TextBox>
 
-                <p>
                 <label><b>Data de Nascimento:</b></label>
-                <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
-                </p>
+                <asp:TextBox type="text" ID="TextBoxNascimento_Medico" runat="server" placeholder="Data de Nascimento" name="data_nascimento"></asp:TextBox>
 
                 <label><b>Género:</b></label>
                 <p>
-                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    <asp:DropDownList ID="DropDownList_Sexo_Medico" runat="server">
                         <asp:ListItem>Masculino</asp:ListItem>
                         <asp:ListItem>Feminino</asp:ListItem>
                     </asp:DropDownList>
