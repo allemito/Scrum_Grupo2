@@ -21,7 +21,6 @@ namespace scrum_Grupo2_website.html
             comando.Connection = conexao;
             panelDoente.Visible = false;
             panelMedico.Visible = false;
-            labelProcurar.Text = "";
         }
 
         protected void ButtonProcurar_Click(object sender, EventArgs e)
@@ -48,7 +47,7 @@ namespace scrum_Grupo2_website.html
                 TextBoxNascimento_Doente.Text = Convert.ToString(comando.ExecuteScalar());
                 comando.CommandText = "SELECT Genero FROM Doente WHERE Numero_Utente = '" + TextBox_Procurar.Text + "'";
                 DropDownList_Sexo.Text = Convert.ToString(comando.ExecuteScalar());
-                comando.ExecuteNonQuery(); 
+                comando.ExecuteNonQuery();
             }
             else
             {
@@ -82,39 +81,42 @@ namespace scrum_Grupo2_website.html
                     labelProcurar.Text = "Não encontrado!";
                 }
             }
-            TextBox_Procurar.Text = "";
         }
 
         protected void ButtonEditar_Medico_Click(object sender, EventArgs e)
         {
-            panelMedico.Visible = true;
-            panelDoente.Visible = false;
-
-            TextBox_Procurar.Text = "ola";      
+            conexao.Open();
+            comando.CommandText = "UPDATE Medico set nome_medico = '"+TextBox_Nome_Medico.Text+"', CONTRIBUINTE_MEDICO = 199111600 where ID_MEDICO";
+            comando.ExecuteNonQuery();
+            conexao.Close();
+            TextBox_Procurar.Text = "";
         }
 
         protected void ButtonRemover_Medico_Click(object sender, EventArgs e)
         {
-            panelMedico.Visible = true;
-            panelDoente.Visible = false;
-
-            TextBox_Procurar.Text = "xau";
+            conexao.Open();
+            comando.CommandText = "DELETE FROM Medico where Numero_Cedula = '"+TextBox_Procurar.Text+"';";
+            comando.ExecuteNonQuery();
+            conexao.Close();
+            TextBox_Procurar.Text = "";
         }
 
         protected void ButtonEditar_Doente_Click(object sender, EventArgs e)
         {
-            panelMedico.Visible = false;
-            panelDoente.Visible = true;
-
-            TextBox_Procurar.Text = "adeus";
+            conexao.Open();
+            comando.CommandText = "";
+            comando.ExecuteNonQuery();
+            conexao.Close();
+            TextBox_Procurar.Text = "";
         }
 
         protected void ButtonRemover_Doente_Click(object sender, EventArgs e)
         {
-            panelMedico.Visible = false;
-            panelDoente.Visible = true;
-
-            TextBox_Procurar.Text = "benvindo";
+            conexao.Open();
+            comando.CommandText = "DELETE FROM Doente where Numero_Utente = '" + TextBox_Procurar.Text + "'";
+            comando.ExecuteNonQuery();
+            conexao.Close();
+            TextBox_Procurar.Text = "";
         }
     }
 }

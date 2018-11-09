@@ -184,15 +184,6 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.TextBox txtbox_email;
         
         /// <summary>
-        /// btn_Guardar_Doente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Guardar_Doente;
-        
-        /// <summary>
         /// panelMedico control.
         /// </summary>
         /// <remarks>
@@ -281,14 +272,5 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox_Email_Medico;
-        
-        /// <summary>
-        /// Button_Guardar_Medico control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_Guardar_Medico;
     }
 }

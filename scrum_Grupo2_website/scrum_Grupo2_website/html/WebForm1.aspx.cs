@@ -15,7 +15,7 @@ namespace scrum_Grupo2_website.html
     public partial class WebForm1 : System.Web.UI.Page
     {
         // Ligação Base Dados Oracle
-        OracleConnection conexao = new OracleConnection("DATA SOURCE=localhost:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
+        OracleConnection conexao = new OracleConnection("DATA SOURCE=25.15.145.193:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
         OracleCommand comando = new OracleCommand();
         OracleDataReader dataReader;
 
@@ -27,8 +27,8 @@ namespace scrum_Grupo2_website.html
         protected void Button1_Click(object sender, EventArgs e)
         {
 
-            int Numer_inserido = Convert.ToInt32(TextBox1.Text);
-            ObterNumero(Numer_inserido);
+            //int Numer_inserido = Convert.ToInt32(TextBox1.Text);
+           // ObterNumero(Numer_inserido);
             //OracleConnection conexao = new OracleConnection("DATA SOURCE=localhost:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
 
            
@@ -58,22 +58,22 @@ namespace scrum_Grupo2_website.html
             }
             */
 
-            //conexao.Open();
+            conexao.Open();
             //comando.CommandText = "SELECT ID_Doente, Nome_Doente, Data_Nascimento_Doente, Morada, Numero_Utente, Genero, Email_Doente FROM Doente";
-            //comando.ExecuteNonQuery();
-            //Label1.Text = comando.CommandText = "SELECT ID_Doente FROM Doente";
+
+            TextBox1.Text = comando.CommandText = "SELECT Nome_Doente FROM Doente ";
+            TextBox1.Text = Convert.ToString(comando.ExecuteScalar());
             //Label2.Text = comando.CommandText = "SELECT Nome_Doente FROM Doente";
             //Label3.Text = comando.CommandText = "SELECT  Data_Nascimento_Doente FROM Doente";
             //Label4.Text = comando.CommandText = "SELECT Morada FROM Doente";
             //Label5.Text = comando.CommandText = "SELECT Genero FROM Doente";
             //Label6.Text = comando.CommandText = "SELECT Email_Doente FROM Doente";
-            //conexao.Close();
+            conexao.Close();
 
         }
 
         private void ObterNumero(int Numero_Inserido)
         {
-            OracleConnection conexao = new OracleConnection("DATA SOURCE=localhost:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
             string sql = "SELECT ID_Doente FROM Doente WHERE ID_Doente = @Numero_Inserido";
             OracleCommand comando = new OracleCommand(sql, conexao);
             comando.Parameters.Add("@ID_Doente", Numero_Inserido);

@@ -56,22 +56,29 @@ namespace scrum_Grupo2_website.html
                             novoID = 1;
                         }
 
-                        comando.CommandText = "INSERT INTO Doente(ID_Doente, Nome_Doente, Data_Nascimento_Doente, Morada, Numero_Utente, Genero, Password_Doente, Email_Doente) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + TextBox_numeroutente.Text + "', '" + DropDownList_Sexo.Text + "', '" + novaPassword + "', '" + txtbox_email.Text + "')";
-                        comando.ExecuteNonQuery();
-                        conexao.Close();
+                        try
+                        {
+                            comando.CommandText = "INSERT INTO Doente(ID_Doente, Nome_Doente, Data_Nascimento_Doente, Morada, Numero_Utente, Genero, Password_Doente, Email_Doente) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + TextBox_numeroutente.Text + "', '" + DropDownList_Sexo.Text + "', '" + novaPassword + "', '" + txtbox_email.Text + "')";
+                            comando.ExecuteNonQuery();
+                            conexao.Close();
 
-                        // Enviar Email de Registo
-                        registo.EnviarEmail(txtbox_email.Text, txtbox_nome.Text, novaPassword);
+                            // Enviar Email de Registo
+                            registo.EnviarEmail(txtbox_email.Text, txtbox_nome.Text, novaPassword);
 
-                        // Limpar as textbox apos registo de doente
-                        txtbox_nome.Text = "";
-                        txtbox_email.Text = "";
-                        TextBox_morada.Text = "";
-                        TextBox_numeroutente.Text = "";
-                        Calendar_datanascimento.SelectedDates.Clear();
-                        DropDownList_Sexo.ClearSelection();
-                   
-                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo Conluido com sucesso!');", true);
+                            // Limpar as textbox apos registo de doente
+                            txtbox_nome.Text = "";
+                            txtbox_email.Text = "";
+                            TextBox_morada.Text = "";
+                            TextBox_numeroutente.Text = "";
+                            Calendar_datanascimento.SelectedDates.Clear();
+                            DropDownList_Sexo.ClearSelection();
+
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo Conluido com sucesso!');", true);
+                        }
+                        catch(Oracle.ManagedDataAccess.Client.OracleException)
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('O Número de Utente já se encontra registado!');", true);
+                        }
                     }
                     else
                     {

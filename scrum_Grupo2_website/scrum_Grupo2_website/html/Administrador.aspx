@@ -51,8 +51,6 @@
 
                 <label for="email"><b>Email:</b></label>
                 <asp:TextBox type="text" ID="txtbox_email" runat="server" placeholder="Email" name="email"></asp:TextBox>
-
-                <asp:Button type="submit" ID="btn_Guardar_Doente" class="registerbtn" runat="server" Text="Guardar"/>
             </asp:Panel>
             <asp:Panel ID ="panelMedico" runat="server">
                 <asp:Button class="button" ID="ButtonEditar_Medico" runat="server" Text="Editar Dados" Width="217px" OnClick="ButtonEditar_Medico_Click"/>
@@ -83,9 +81,7 @@
                 <asp:TextBox type="text" ID="TextBox_Morada_Medico" runat="server" placeholder="Morada" name="morada"></asp:TextBox>
 
                 <label><b>Email:</b></label>
-                <asp:TextBox type="text" ID="TextBox_Email_Medico" runat="server" placeholder="Email" name="email"></asp:TextBox>
-
-                <asp:Button type="submit" ID="Button_Guardar_Medico" class="registerbtn" runat="server" Text="Guardar"/>   
+                <asp:TextBox type="text" ID="TextBox_Email_Medico" runat="server" placeholder="Email" name="email"></asp:TextBox> 
                 </asp:Panel>
         </div>
     </form>
