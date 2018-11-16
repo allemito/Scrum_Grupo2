@@ -96,6 +96,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\leftbar.css" />
     <Content Include="css\StyleSheet.css" />
     <Content Include="html\Administrador.aspx" />
     <Content Include="html\Contactos.aspx" />
@@ -106,6 +107,7 @@
     <Content Include="html\WebForm1.aspx" />
     <Content Include="image\heart-health-main.jpg" />
     <Content Include="image\saude.jpg" />
+    <Content Include="html\Medico.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -179,6 +181,13 @@
     </Compile>
     <Compile Include="html\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="html\Medico.aspx.cs">
+      <DependentUpon>Medico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="html\Medico.aspx.designer.cs">
+      <DependentUpon>Medico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registo.cs" />

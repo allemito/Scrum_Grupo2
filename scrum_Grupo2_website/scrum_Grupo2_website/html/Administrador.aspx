@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head runat="server">
-    <title></title>
+    <title>Pagina Administrador</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="~/css/StyleSheet.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
 </head>
@@ -21,7 +21,7 @@
             <asp:Button class="buttonleftbar" ID="btn_RegistarMedico" runat="server" Text="Registar Médico" PostBackUrl="~/html/RegistoMedico.aspx" Width ="150px"/>
             <asp:Button class="buttonleftbar" ID="btn_RegistoDoente" runat="server" Text="Registar Doente" PostBackUrl="~/html/RegistoUtente.aspx" Width ="150px"/>
             <asp:Button class="buttonleftbar" ID="ButtonProcurar" runat="server" Text="Procurar" Width ="150px" OnClick="ButtonProcurar_Click"/> 
-            <asp:TextBox type="text" ID="TextBox_Procurar" runat="server" placeholder="Número de Utente" name="numero_utente" Width ="150px"></asp:TextBox>   
+            <asp:TextBox type="text" ID="TextBox_Procurar" runat="server" placeholder="Número Procurar" name="Numero_Procurar" Width ="150px"></asp:TextBox>   
             <asp:label ID="labelProcurar" runat="server" Width ="150px" style="text-align:center" ForeColor="Red"><b></b></asp:label>          
         </ul>
         <div style="height: 590px; margin-left:150px; padding: 20px; border-color: lightseagreen; width: auto;">

@@ -103,5 +103,15 @@ namespace scrum_Grupo2_website
 
             smtp.Send(client);
         }
+
+        public string CalcularIMC(string Altura, string Peso)
+        {
+            double Altura1 = double.Parse(Altura);
+            double Peso1 = double.Parse(Peso);
+            double IMC1 = Math.Round(Peso1 / (Altura1 * Altura1));
+            string IMC = IMC1.ToString();
+
+            return IMC;
+        }
     }
 }

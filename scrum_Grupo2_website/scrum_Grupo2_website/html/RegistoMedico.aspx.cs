@@ -53,24 +53,31 @@ namespace scrum_Grupo2_website.html
                             novoID = 1;
                         }
 
-                        // Inserir dados na Base de Dados
-                        comando.CommandText = "INSERT INTO Medico(ID_Medico, Nome_Medico, Data_Nascimento_Medico, Morada_Medico, Numero_Cedula, Genero_Medico, Contribuinte_Medico, Email_Medico, Password_Medico) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + txtbox_cedula.Text + "', '" + DropDownList_Sexo.Text + "', '" + TextBox_Contribuinte.Text + "', '" + txtbox_email.Text + "', '" + novaPassword + "')";
-                        comando.ExecuteNonQuery();
-                        conexao.Close();
+                        try
+                        {
+                            // Inserir dados na Base de Dados
+                            comando.CommandText = "INSERT INTO Medico(ID_Medico, Nome_Medico, Data_Nascimento_Medico, Morada_Medico, Numero_Cedula, Genero_Medico, Contribuinte_Medico, Email_Medico, Password_Medico) VALUES ('" + novoID + "','" + txtbox_nome.Text + "','" + dataNascimento + "', '" + TextBox_morada.Text + "', '" + txtbox_cedula.Text + "', '" + DropDownList_Sexo.Text + "', '" + TextBox_Contribuinte.Text + "', '" + txtbox_email.Text + "', '" + novaPassword + "')";
+                            comando.ExecuteNonQuery();
+                            conexao.Close();
 
-                        // Enviar Email de Registo
-                        registo.EnviarEmail(txtbox_email.Text, txtbox_nome.Text, novaPassword);
+                            // Enviar Email de Registo
+                            registo.EnviarEmail(txtbox_email.Text, txtbox_nome.Text, novaPassword);
 
-                        // Limpar Textbox apos registo do médico
-                        txtbox_nome.Text = "";
-                        txtbox_email.Text = "";
-                        TextBox_morada.Text = "";
-                        TextBox_Contribuinte.Text = "";
-                        txtbox_cedula.Text = "";
-                        Calendar_datanascimento.SelectedDates.Clear();
-                        DropDownList_Sexo.ClearSelection();
+                            // Limpar Textbox apos registo do médico
+                            txtbox_nome.Text = "";
+                            txtbox_email.Text = "";
+                            TextBox_morada.Text = "";
+                            TextBox_Contribuinte.Text = "";
+                            txtbox_cedula.Text = "";
+                            Calendar_datanascimento.SelectedDates.Clear();
+                            DropDownList_Sexo.ClearSelection();
 
-                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo Concluido com sucesso!');", true);
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo Concluido com sucesso!');", true);
+                        }
+                        catch(Oracle.ManagedDataAccess.Client.OracleException)
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('A cédula de médico já se encontra registado!');", true);
+                        }
                     }
                     else
                     {

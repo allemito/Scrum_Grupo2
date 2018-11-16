@@ -26,14 +26,14 @@ namespace scrum_Grupo2_website.html
             conexao.Open();
             comando.CommandText = "SELECT username_direcao FROM direcao WHERE USERNAME_DIRECAO = '" + txtbox_username.Text + "'";
             comando.ExecuteNonQuery();
-            string username = Convert.ToString(comando.ExecuteScalar());
+            string usernameAdministrador = Convert.ToString(comando.ExecuteScalar());
 
-            if (txtbox_username.Text == username && txtbox_username.Text != "")
+            if(txtbox_username.Text == usernameAdministrador && txtbox_username.Text != "")
             {
-                comando.CommandText = "SELECT Password_Direcao FROM Direcao where USERNAME_DIRECAO = '"+username+"'";
+                comando.CommandText = "SELECT Password_Direcao FROM Direcao where USERNAME_DIRECAO = '" + usernameAdministrador + "'";
                 comando.ExecuteNonQuery();
-                string password = Convert.ToString(comando.ExecuteScalar());
-                if (txtbox_password.Text == password && txtbox_password.Text != "")
+                string passwordAdministrador = Convert.ToString(comando.ExecuteScalar());
+                if (txtbox_password.Text == passwordAdministrador && txtbox_password.Text != "")
                 {
                     Response.Redirect("~/html/Administrador.aspx");
                     conexao.Close();
@@ -45,8 +45,54 @@ namespace scrum_Grupo2_website.html
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Utilizador ou Password Incorretos!');", true);
-            }
+                comando.CommandText = "SELECT Numero_Cedula FROM Medico WHERE Numero_Cedula = '" + txtbox_username.Text + "'";
+                comando.ExecuteNonQuery();
+                string userMedico = Convert.ToString(comando.ExecuteScalar());
+
+                if (txtbox_username.Text == userMedico && txtbox_username.Text != "")
+                {
+                    comando.CommandText = "SELECT Password_Medico FROM Medico where Numero_Cedula = '" + userMedico + "'";
+                    comando.ExecuteNonQuery();
+                    string passwordMedico = Convert.ToString(comando.ExecuteScalar());
+                    if (txtbox_password.Text == passwordMedico && txtbox_password.Text != "")
+                    {
+                        Response.Redirect("~/html/Medico.aspx");
+                        conexao.Close();
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Utilizador ou Password Incorretos!');", true);
+                    }           
+                }
+                else
+                {
+                    comando.CommandText = "SELECT Numero_Utente FROM Doente WHERE Numero_Utente = '" + txtbox_username.Text + "'";
+                    comando.ExecuteNonQuery();
+                    string userDoente = Convert.ToString(comando.ExecuteScalar());
+
+                    if (txtbox_username.Text == userDoente && txtbox_username.Text != "")
+                    {
+                        comando.CommandText = "SELECT Password_Doente FROM Doente where Numero_Utente = '" + userDoente + "'";
+                        comando.ExecuteNonQuery();
+                        string passwordDoente = Convert.ToString(comando.ExecuteScalar());
+                        if (txtbox_password.Text == passwordDoente && txtbox_password.Text != "")
+                        {
+                            //Response.Redirect("~/html/Medico.aspx");
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Sucesso ao abrir conta Doente!');", true);
+                            conexao.Close();
+                        }
+                        else
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Utilizador ou Password Incorretos!');", true);
+                        }
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Utilizador ou Password Incorretos!');", true);
+                        conexao.Close();
+                    }
+                }            
+            } 
         }
     }
 }

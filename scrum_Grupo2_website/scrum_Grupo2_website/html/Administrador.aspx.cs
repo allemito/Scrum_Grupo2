@@ -15,12 +15,14 @@ namespace scrum_Grupo2_website.html
         OracleConnection conexao = new OracleConnection("DATA SOURCE=25.15.145.193:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
         OracleCommand comando = new OracleCommand();
         OracleDataReader dataReader;
+        Registo registo = new Registo();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             comando.Connection = conexao;
             panelDoente.Visible = false;
             panelMedico.Visible = false;
+            labelProcurar.Text = "";
         }
 
         protected void ButtonProcurar_Click(object sender, EventArgs e)
@@ -48,6 +50,7 @@ namespace scrum_Grupo2_website.html
                 comando.CommandText = "SELECT Genero FROM Doente WHERE Numero_Utente = '" + TextBox_Procurar.Text + "'";
                 DropDownList_Sexo.Text = Convert.ToString(comando.ExecuteScalar());
                 comando.ExecuteNonQuery();
+                conexao.Close();
             }
             else
             {
@@ -75,6 +78,7 @@ namespace scrum_Grupo2_website.html
                     comando.CommandText = "SELECT Data_Nascimento_Medico FROM Medico WHERE Numero_Cedula = '" + TextBox_Procurar.Text + "'";
                     TextBoxNascimento_Medico.Text = Convert.ToString(comando.ExecuteScalar());
                     comando.ExecuteNonQuery();
+                    conexao.Close();
                 }
                 else
                 {
@@ -85,17 +89,40 @@ namespace scrum_Grupo2_website.html
 
         protected void ButtonEditar_Medico_Click(object sender, EventArgs e)
         {
-            conexao.Open();
-            comando.CommandText = "UPDATE Medico set nome_medico = '"+TextBox_Nome_Medico.Text+"', CONTRIBUINTE_MEDICO = 199111600 where ID_MEDICO";
-            comando.ExecuteNonQuery();
-            conexao.Close();
-            TextBox_Procurar.Text = "";
+            if (TextBox_Nome_Medico.Text != "" & TextBox_Morada_Medico.Text != "" & TextBox_Contribuinte_Medico.Text != "" & DropDownList_Sexo_Medico.Text != "" & txtbox_cedula.Text != "")
+            {
+                if (registo.verificarEmail(TextBox_Email_Medico.Text) == true)
+                {
+                    conexao.Open();
+                    comando.CommandText = "UPDATE Medico set Nome_Medico = '" + TextBox_Nome_Medico.Text + "', Morada_Medico = '" + TextBox_Morada_Medico.Text + "', Contribuinte_Medico = '" + TextBox_Contribuinte_Medico.Text + "', Genero_Medico = '" + DropDownList_Sexo_Medico.Text + "', Email_Medico = '" + TextBox_Email_Medico.Text + "',  Numero_Cedula = '" + txtbox_cedula.Text + "' WHERE Numero_Cedula = '" + TextBox_Procurar.Text + "'";
+                    comando.ExecuteNonQuery();
+                    conexao.Close();
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo alterado com sucesso!');", true);
+                    TextBox_Procurar.Text = "";
+
+                    panelDoente.Visible = false;
+                    panelMedico.Visible = true;
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Email inválido, por favor verifique novamente!');", true);
+                    panelDoente.Visible = false;
+                    panelMedico.Visible = true;
+                }
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                panelDoente.Visible = false;
+                panelMedico.Visible = true;
+            }
         }
 
         protected void ButtonRemover_Medico_Click(object sender, EventArgs e)
         {
             conexao.Open();
-            comando.CommandText = "DELETE FROM Medico where Numero_Cedula = '"+TextBox_Procurar.Text+"';";
+            comando.CommandText = "DELETE FROM Medico where Numero_Cedula = '"+ TextBox_Procurar.Text +"'";
             comando.ExecuteNonQuery();
             conexao.Close();
             TextBox_Procurar.Text = "";
@@ -103,11 +130,33 @@ namespace scrum_Grupo2_website.html
 
         protected void ButtonEditar_Doente_Click(object sender, EventArgs e)
         {
-            conexao.Open();
-            comando.CommandText = "";
-            comando.ExecuteNonQuery();
-            conexao.Close();
-            TextBox_Procurar.Text = "";
+            if (txtbox_nome.Text != "" & TextBox_morada.Text != "" & TextBox_Utente.Text != "" & DropDownList_Sexo.Text != "")
+            {
+                if (registo.verificarEmail(txtbox_email.Text) == true)
+                {
+                    panelDoente.Visible = true;
+                    panelMedico.Visible = false;
+                    conexao.Open();
+                    comando.CommandText = "UPDATE Doente set Nome_Doente = '"+txtbox_nome.Text+"', Morada = '"+TextBox_morada.Text+"', Numero_Utente = '"+TextBox_Utente.Text+"', Genero = '"+DropDownList_Sexo.Text+"', Email_Doente = '"+txtbox_email.Text+"' WHERE Numero_Utente = '"+TextBox_Procurar.Text+"'";
+                    comando.ExecuteNonQuery();
+                    conexao.Close();
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Registo alterado com sucesso!');", true);
+                    TextBox_Procurar.Text = "";
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Email inválido, por favor verifique novamente!');", true);
+                    panelDoente.Visible = true;
+                    panelMedico.Visible = false;
+                }
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                panelDoente.Visible = true;
+                panelMedico.Visible = false;
+            }
         }
 
         protected void ButtonRemover_Doente_Click(object sender, EventArgs e)

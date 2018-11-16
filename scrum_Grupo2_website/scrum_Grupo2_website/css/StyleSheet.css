@@ -130,8 +130,6 @@ a {
     text-align: center;
 }
 
-
-
 ul.leftbar {
     list-style-type: none;
     margin: 0;
@@ -156,8 +154,36 @@ ul.leftbar {
 .buttonleftbar:hover {
         background-color: grey;
         color: white;
-    }
+}
 
+ul.med {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+
+.btnmed {
+    background-color: lightskyblue; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+
+.btnmed:hover {
+    background-color: grey;
+    color: white;
+}
 
 
 
