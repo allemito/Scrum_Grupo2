@@ -29,6 +29,8 @@
                 <asp:Button class="button" ID="ButtonEditar_Doente" runat="server" Text="Editar Dados" Width="217px" OnClick="ButtonEditar_Doente_Click"/>
                 &nbsp;
                 <asp:Button class="button" ID="ButtonRemover_Doente" runat="server" Text="Remover Doente" Width="217px" OnClick="ButtonRemover_Doente_Click"/>
+                &nbsp;
+                <asp:Button class="button" ID="ButtonInfo_Socio" runat="server" Text="Socioedemográfica" Width="217px" OnClick="ButtonInfo_Socio_Click"/>
                 <p></p>
                 <label for="nome"><b>Nome:</b></label>
                 <asp:TextBox type="text" ID="txtbox_nome" runat="server" placeholder="Nome" name="nome"></asp:TextBox>
@@ -83,6 +85,57 @@
                 <label><b>Email:</b></label>
                 <asp:TextBox type="text" ID="TextBox_Email_Medico" runat="server" placeholder="Email" name="email"></asp:TextBox> 
                 </asp:Panel>
+            <asp:Panel ID ="panelInfo_Socio" runat ="server">
+                
+                <label><b>Nome:</b></label>
+                <asp:TextBox type="text" ID="TextBox_Nome_Socio" runat="server" placeholder="Nome" name="nome"></asp:TextBox>
+
+                <label><b>Data de Nascimento:</b></label>
+                <asp:TextBox type="text" ID="TextBox_DataNascimento_Socio" runat="server" placeholder="Data de Nascimento" name="data_nascimento"></asp:TextBox>
+
+                <label><b>Morada:</b></label>
+                <asp:TextBox type="text" ID="TextBox_Morada_Socio" runat="server" placeholder="Morada" name="morada"></asp:TextBox>
+
+                <label><b>Nacionalidade:</b></label>
+                <asp:TextBox type="text" ID="TextBox_Nacionalidade_Socio" runat="server" placeholder="Nacionalidade" name="nacionalidade"></asp:TextBox>
+
+                <label><b>Naturalidade:</b></label>
+                <asp:TextBox type="text" ID="TextBox_Naturalidade_Socio" runat="server" placeholder="Naturalidade" name="naturalidade"></asp:TextBox>
+           
+                <label><b>Estado Civil:</b></label>
+                <p>
+                <asp:DropDownList ID="DropDownList_EstadoCivil_Socio" runat="server">
+                    <asp:ListItem>Solteiro(a)</asp:ListItem>
+                    <asp:ListItem>Casado(a)</asp:ListItem>
+                    <asp:ListItem>Divorciado(a)</asp:ListItem>
+                    <asp:ListItem>Viuvo(a)</asp:ListItem>
+                </asp:DropDownList>
+                </p>
+               
+                <label><b>Número de filhos:</b></label>
+                <p><asp:TextBox ID="Textbox_NumeroFilhos_Socio" type="text" TextMode="Number" runat="server" min="0" max="20" step="1"></asp:TextBox></p>
+
+                <label><b>Agregado familiar (Número de pessoas):</b></label>
+                <p><asp:TextBox ID="Textbox_Agregado_Socio" type="text" TextMode="Number" runat="server" min="0" max="20" step="1"></asp:TextBox></p>
+
+                <label><b>Profissão:</b></label>
+                <asp:TextBox type="text" ID="TextBox_Profissão_Socio" runat="server" placeholder="Profissão" name="profissão"></asp:TextBox>
+
+                <label><b>Grau de Escolaridade:</b></label>
+                <p>
+                <asp:DropDownList ID="DropDownList_Escolaridade_Socio" runat="server">
+                    <asp:ListItem>Nenhum</asp:ListItem>
+                    <asp:ListItem>1º Ciclo</asp:ListItem>
+                    <asp:ListItem>2º Ciclo</asp:ListItem>
+                    <asp:ListItem>3º Ciclo</asp:ListItem>
+                    <asp:ListItem>Ensino Secundário</asp:ListItem>
+                    <asp:ListItem>Ensino Superior (Licenciatura)</asp:ListItem>
+                    <asp:ListItem>Ensino Superior (Mestrado)</asp:ListItem>
+                    <asp:ListItem>Ensino Superior (Doutoramento)</asp:ListItem>
+                </asp:DropDownList>
+                </p>
+                <asp:Button type="submit" ID="Button_Guardar_Socio" class="registerbtn" runat="server" Text="Guardar" OnClick="Button_Guardar_Socio_Click" />
+            </asp:Panel>
         </div>
     </form>
 </body>

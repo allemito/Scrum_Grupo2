@@ -14,6 +14,21 @@ namespace scrum_Grupo2_website
     {
         bool invalid = false;
 
+        //Verificar apenas se existe numeros
+        public bool verificarNumero(string textbox)
+        {
+            Regex num = new Regex("[^0-9]");
+
+            if (num.IsMatch(textbox))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }  
+        }
+
         //Função para verificar email
         public bool verificarEmail(string strIn)
         {

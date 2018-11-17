@@ -130,6 +130,15 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Button ButtonRemover_Doente;
         
         /// <summary>
+        /// ButtonInfo_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonInfo_Socio;
+        
+        /// <summary>
         /// txtbox_nome control.
         /// </summary>
         /// <remarks>
@@ -272,5 +281,113 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox_Email_Medico;
+        
+        /// <summary>
+        /// panelInfo_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelInfo_Socio;
+        
+        /// <summary>
+        /// TextBox_Nome_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Nome_Socio;
+        
+        /// <summary>
+        /// TextBox_DataNascimento_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_DataNascimento_Socio;
+        
+        /// <summary>
+        /// TextBox_Morada_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Morada_Socio;
+        
+        /// <summary>
+        /// TextBox_Nacionalidade_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Nacionalidade_Socio;
+        
+        /// <summary>
+        /// TextBox_Naturalidade_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Naturalidade_Socio;
+        
+        /// <summary>
+        /// DropDownList_EstadoCivil_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_EstadoCivil_Socio;
+        
+        /// <summary>
+        /// Textbox_NumeroFilhos_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Textbox_NumeroFilhos_Socio;
+        
+        /// <summary>
+        /// Textbox_Agregado_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Textbox_Agregado_Socio;
+        
+        /// <summary>
+        /// TextBox_Profissão_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Profissão_Socio;
+        
+        /// <summary>
+        /// DropDownList_Escolaridade_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Escolaridade_Socio;
+        
+        /// <summary>
+        /// Button_Guardar_Socio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Guardar_Socio;
     }
 }

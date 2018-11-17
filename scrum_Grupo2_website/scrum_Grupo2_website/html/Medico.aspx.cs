@@ -30,28 +30,35 @@ namespace scrum_Grupo2_website
 
         protected void ButtonProcurar_Click(object sender, EventArgs e)
         {
-            //Limpar Dados anteriores
-            label_Falta.Text = "";
-            labelIMC.Text = "";
-           
-            //Executar Query de procura
-            conexao.Open();
-            comando.CommandText = "SELECT Numero_Utente FROM Doente WHERE Numero_Utente = '" + TextBox_Procurar.Text + "'";
-            comando.ExecuteNonQuery();
-            string IdProcurarDoente = Convert.ToString(comando.ExecuteScalar());
-
-            if (TextBox_Procurar.Text == IdProcurarDoente && TextBox_Procurar.Text != "")
+            if(registo.verificarNumero(TextBox_Procurar.Text ) == true)
             {
-                panelDoente.Visible = true;
+                //Limpar Dados anteriores
+                label_Falta.Text = "";
+                labelIMC.Text = "";
 
-                comando.CommandText = "SELECT Nome_Doente FROM Doente WHERE Numero_Utente = '" + TextBox_Procurar.Text + "'";
-                TextBox_Nome.Text = Convert.ToString(comando.ExecuteScalar());
+                //Executar Query de procura
+                conexao.Open();
+                comando.CommandText = "SELECT Numero_Utente FROM Doente WHERE Numero_Utente = '" + TextBox_Procurar.Text + "'";
                 comando.ExecuteNonQuery();
-                conexao.Close();
+                string IdProcurarDoente = Convert.ToString(comando.ExecuteScalar());
+
+                if (TextBox_Procurar.Text == IdProcurarDoente && TextBox_Procurar.Text != "")
+                {
+                    panelDoente.Visible = true;
+
+                    comando.CommandText = "SELECT Nome_Doente FROM Doente WHERE Numero_Utente = '" + TextBox_Procurar.Text + "'";
+                    TextBox_Nome.Text = Convert.ToString(comando.ExecuteScalar());
+                    comando.ExecuteNonQuery();
+                    conexao.Close();
+                }
+                else
+                {
+                    labelProcurar.Text = "Não encontrado!";
+                }
             }
             else
             {
-                labelProcurar.Text = "Não encontrado!";
+                labelProcurar.Text = "Introduza um número válido!";
             }
         }
 
