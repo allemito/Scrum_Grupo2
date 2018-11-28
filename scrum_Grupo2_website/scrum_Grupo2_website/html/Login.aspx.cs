@@ -77,8 +77,7 @@ namespace scrum_Grupo2_website.html
                         string passwordDoente = Convert.ToString(comando.ExecuteScalar());
                         if (txtbox_password.Text == passwordDoente && txtbox_password.Text != "")
                         {
-                            //Response.Redirect("~/html/Medico.aspx");
-                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Sucesso ao abrir conta Doente!');", true);
+                            Response.Redirect("~/html/Doente.aspx");
                             conexao.Close();
                         }
                         else

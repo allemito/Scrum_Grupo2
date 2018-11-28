@@ -76,6 +76,15 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.Button btn_RegistoDoente;
         
         /// <summary>
+        /// btn_Questionario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Questionario;
+        
+        /// <summary>
         /// ButtonProcurar control.
         /// </summary>
         /// <remarks>

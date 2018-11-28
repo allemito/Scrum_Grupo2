@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="QuestionarioDoente.aspx.cs" Inherits="scrum_Grupo2_website.QuestionarioDoente" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Doente.aspx.cs" Inherits="scrum_Grupo2_website.QuestionarioDoente" %>
 
 <!DOCTYPE html>
 

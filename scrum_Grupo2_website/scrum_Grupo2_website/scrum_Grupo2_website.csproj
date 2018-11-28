@@ -120,9 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="html\homepage.aspx" />
-    <Content Include="html\QuestionariosAdmin.aspx" />
-    <Content Include="html\QuestionarioDoente.aspx" />
-    <Content Include="html\QuestionarioMedico.aspx" />
+    <Content Include="html\Doente.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Web.config" />
@@ -185,26 +183,12 @@
       <DependentUpon>Medico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="html\QuestionariosAdmin.aspx.cs">
-      <DependentUpon>QuestionariosAdmin.aspx</DependentUpon>
+    <Compile Include="html\Doente.aspx.cs">
+      <DependentUpon>Doente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="html\QuestionariosAdmin.aspx.designer.cs">
-      <DependentUpon>QuestionariosAdmin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="html\QuestionarioDoente.aspx.cs">
-      <DependentUpon>QuestionarioDoente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="html\QuestionarioDoente.aspx.designer.cs">
-      <DependentUpon>QuestionarioDoente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="html\QuestionarioMedico.aspx.cs">
-      <DependentUpon>QuestionarioMedico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="html\QuestionarioMedico.aspx.designer.cs">
-      <DependentUpon>QuestionarioMedico.aspx</DependentUpon>
+    <Compile Include="html\Doente.aspx.designer.cs">
+      <DependentUpon>Doente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registo.cs" />
   </ItemGroup>
