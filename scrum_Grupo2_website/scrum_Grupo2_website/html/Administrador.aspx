@@ -20,7 +20,7 @@
         <ul class="leftbar">
             <asp:Button class="buttonleftbar" ID="btn_RegistarMedico" runat="server" Text="Registar Médico" PostBackUrl="~/html/RegistoMedico.aspx" Width ="150px" UseSubmitBehavior="False"/>
             <asp:Button class="buttonleftbar" ID="btn_RegistoDoente" runat="server" Text="Registar Doente" PostBackUrl="~/html/RegistoUtente.aspx" Width ="150px" UseSubmitBehavior="False"/>
-            <asp:Button class="buttonleftbar" ID="btn_Questionario" runat="server" Text="Questionários" Width ="150px" UseSubmitBehavior="False"/>
+            <asp:Button class="buttonleftbar" ID="btn_Questionario" runat="server" Text="Questionários" Width ="150px" UseSubmitBehavior="False" OnClick="btn_Questionario_Click"/>
             <asp:Button class="buttonleftbar" ID="ButtonProcurar" runat="server" Text="Procurar" Width ="150px" OnClick="ButtonProcurar_Click"/> 
             <asp:TextBox type="text" ID="TextBox_Procurar" runat="server" placeholder="Número Procurar" name="Numero_Procurar" Width ="150px"></asp:TextBox>   
             <asp:label ID="labelProcurar" runat="server" Width ="150px" style="text-align:center" ForeColor="Red"><b></b></asp:label>          
@@ -136,6 +136,21 @@
                 </asp:DropDownList>
                 </p>
                 <asp:Button type="submit" ID="Button_Guardar_Socio" class="registerbtn" runat="server" Text="Guardar" OnClick="Button_Guardar_Socio_Click" />
+            </asp:Panel>
+            <asp:Panel ID ="panelQuestionario" runat ="server">
+                 <h1>Inserção de Questionarios</h1>
+                <label><b>Nome do Questionário:</b></label>
+                <asp:TextBox type="text" ID="TextBoxNomeQuestionario" runat="server" placeholder="Adicione um nome ao questionário" name="nome"></asp:TextBox>
+                 <p><asp:label ID="labelQuestionario" runat="server"><b>Questão</b></asp:label></p>
+                 <asp:TextBox type="text" ID="TextBoxPergunta" runat="server" placeholder="Adicione uma pergunta" name="Pergunta"></asp:TextBox>
+                 <label><b>Selecione o tipo de resposta pretendida:</b></label>
+                 <p><asp:DropDownList ID="DropDownListTipoPergunta" runat="server">
+                     <asp:ListItem>Resposta Aberta</asp:ListItem>   
+                     <asp:ListItem>Resposta Sim/Não</asp:ListItem>    
+                     <asp:ListItem>Resposta Frequência</asp:ListItem> 
+                     <asp:ListItem>Resposta Satisfação</asp:ListItem>   
+                 </asp:DropDownList></p>
+                 <asp:Button type="submit" ID="ButtonAdicionarQuestao" class="registerbtn" runat="server" Text="Adicionar Questão" OnClick="ButtonAdicionarQuestionario_Click"/>
             </asp:Panel>
         </div>
     </form>

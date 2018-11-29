@@ -16,6 +16,8 @@ namespace scrum_Grupo2_website.html
         OracleCommand comando = new OracleCommand();
         OracleDataReader dataReader;
         Registo registo = new Registo();
+        int numero_pergunta = 1;
+        int novoID = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,7 +25,21 @@ namespace scrum_Grupo2_website.html
             panelDoente.Visible = false;
             panelMedico.Visible = false;
             panelInfo_Socio.Visible = false;
+            panelQuestionario.Visible = false;
             labelProcurar.Text = "";
+
+            labelQuestionario.Text = "Questão-" + numero_pergunta;
+            if (IsPostBack)
+            {
+                if (ViewState["count"] != null)
+                {
+                    numero_pergunta = (int)ViewState["count"];
+                }
+                if (ViewState["novoID"] != null)
+                {
+                    novoID = (int)ViewState["novoID"];
+                }
+            }
         }
 
         protected void ButtonProcurar_Click(object sender, EventArgs e)
@@ -232,6 +248,64 @@ namespace scrum_Grupo2_website.html
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Utente com dados já inseridos!');", true);
                 }      
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+            }
+        }
+
+        protected void btn_Questionario_Click(object sender, EventArgs e)
+        {
+            panelDoente.Visible = false;
+            panelMedico.Visible = false;
+            panelInfo_Socio.Visible = false;
+            panelQuestionario.Visible = true;
+            TextBoxNomeQuestionario.Text = "";
+
+            // Dar Reset ao numero das questoes
+            numero_pergunta = 1;
+            ViewState["count"] = numero_pergunta;
+            try
+            {
+                conexao.Open();
+                comando.CommandText = "SELECT MAX(ID_Questionario)+1 from Questionario_Perguntas";
+                comando.ExecuteNonQuery();
+                novoID = Convert.ToInt32(comando.ExecuteScalar());
+                conexao.Close();
+                ViewState["novoID"] = novoID;
+            }
+            catch (System.InvalidCastException)
+            {
+                novoID = 1;
+                ViewState["novoID"] = novoID;
+            }
+        }
+
+        protected void ButtonAdicionarQuestionario_Click(object sender, EventArgs e)
+        {
+            //Colocar Panel visiveis e invisiveis
+            panelDoente.Visible = false;
+            panelMedico.Visible = false;
+            panelInfo_Socio.Visible = false;
+            panelQuestionario.Visible = true;
+
+            if(TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
+            {
+                string numero_questao = ("Questão-" + numero_pergunta).ToString();
+                conexao.Open();
+                comando.CommandText = "INSERT INTO Questionario_Perguntas(ID_Questionario, Nome_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('"+novoID+"', '"+TextBoxNomeQuestionario.Text+"', '"+numero_questao+"', '"+TextBoxPergunta.Text+"', '"+DropDownListTipoPergunta.Text+"')";
+                comando.ExecuteNonQuery();
+                conexao.Close();
+
+                //Limpar Pergunta anterior para passar para a proxima
+                TextBoxPergunta.Text = "";
+                DropDownListTipoPergunta.ClearSelection();
+
+                //Incrementar o numero da pergunta
+                numero_pergunta++;
+                ViewState["count"] = numero_pergunta;
+                labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
             }
             else
             {
