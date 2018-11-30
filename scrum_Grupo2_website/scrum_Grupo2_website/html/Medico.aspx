@@ -14,12 +14,13 @@
 <body>
     <form id="form1" runat="server" style="margin: auto">
         <ul class="topnav">
-            <asp:Button class="button" ID="Button1" runat="server" Text="Home" Width="150px" PostBackUrl="~/html/homepage.aspx" UseSubmitBehavior="False"/>
+            <asp:Button class="button" ID="ButtonHome" runat="server" Text="Home" Width="150px" PostBackUrl="~/html/homepage.aspx" UseSubmitBehavior="False"/>
             <asp:Button class="button" ID="btn_paginaInicial" runat="server" Text="Página Inicial" PostBackUrl="~/html/Medico.aspx" UseSubmitBehavior="False"/>
             <asp:Button class="button" ID="btn_faq" runat="server" Text="F.A.Q" PostBackUrl="~/html/Faq.aspx" UseSubmitBehavior="False"/>
             <asp:Button class="button" ID="btn_contactos" runat="server" Text="Contactos" PostBackUrl="~/html/Contactos.aspx" UseSubmitBehavior="False"/>
         </ul>
         <ul class="med">
+            <asp:Button class="btnmed" ID="ButtonRecolha" runat="server" Text="Recolha Dados" Width ="150px" UseSubmitBehavior="False" OnClick="ButtonRecolha_Click"/>
             <asp:Button class="btnmed" ID="btn_Questionario" runat="server" Text="Questionários" Width ="150px" UseSubmitBehavior="False"/>
             <asp:Button class="btnmed" ID="ButtonProcurar" runat="server" Text="Procurar" Width ="150px" OnClick="ButtonProcurar_Click"/> 
             <asp:TextBox type="text" ID="TextBox_Procurar" runat="server" placeholder="Número de Utente" name="numero_utente" Width ="150px"></asp:TextBox>   
@@ -79,6 +80,19 @@
                 <asp:Button class="button" ID="Button_Falta" runat="server" Text="Adicionar Vacina" Width="217px" OnClick="Button_Falta_Click"/>
                 <p><asp:label ID="label_Falta" runat="server"></asp:label></p>
                 <asp:Button type="submit" ID="Button_Adicionar" class="registerbtn" runat="server" Text="Adicionar" OnClick="Button_Adicionar_Click"/>
+            </asp:Panel>
+            <asp:Panel ID ="panelExcel" runat ="server">
+                <asp:FileUpload ID="FileUpload1" runat="server"/>
+                <p><asp:Label ID="LabelTexto" runat="server"><b></b></asp:Label></p>
+
+                <asp:Button ID="ButtonAdicionarInfo" runat="server" class="btnmed" Text="Guardar Dados Biometricos" Width="217px" OnClick="ButtonAdicionarInfo_Click"/>
+                <asp:Button ID="ButtonExcel" runat="server" class="btnmed" Text="Upload" Width="217px" ValidateRequestGroup="vg" OnClick="ButtonExcel_Click" />
+                
+                <p><asp:GridView ID="GridView1" runat="server" EmptyDataText="No record found!">
+                <RowStyle Width="175px" />
+                <EmptyDataRowStyle BackColor="Silver" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" ForeColor="#003300" />
+                <HeaderStyle BackColor="#6699ff" BorderColor="#333333" BorderStyle="Solid" BorderWidth="1px" VerticalAlign="Top" Wrap="true" />
+                </asp:GridView></p>          
             </asp:Panel>
         </div>
     </form>

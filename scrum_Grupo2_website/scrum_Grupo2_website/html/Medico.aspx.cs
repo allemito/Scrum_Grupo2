@@ -6,6 +6,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.OleDb;
+using System.Data;
+using System.ComponentModel;
+using System.Drawing;
+using System.Text;
+using System.IO;
+//using Microsoft.Office.Interop.Excel;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace scrum_Grupo2_website
 {
@@ -21,6 +30,8 @@ namespace scrum_Grupo2_website
         {
             comando.Connection = conexao;
             panelDoente.Visible = false;
+            panelExcel.Visible = false;
+            ButtonAdicionarInfo.Visible = false;
             label_Vacina_Falta.Visible = false;
             Button_Falta.Visible = false;
             ddl_vacine.Visible = false; ;
@@ -155,6 +166,132 @@ namespace scrum_Grupo2_website
             {
                 panelDoente.Visible = true;
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+            }
+        }
+
+        protected void ButtonRecolha_Click(object sender, EventArgs e)
+        {
+            panelExcel.Visible = true;
+            panelDoente.Visible = false;
+            ButtonAdicionarInfo.Visible = false;
+            ButtonExcel.Visible = true;
+
+            GridView1.DataSource = null;
+            GridView1.Visible = false;
+
+        }
+
+        protected void ButtonExcel_Click(object sender, EventArgs e)
+        {
+            panelExcel.Visible = true;
+            panelDoente.Visible = false;
+
+            //apanhar o path que se pos no web.config
+            string FilePath = ConfigurationManager.AppSettings["FilePath"].ToString();
+            string FileName = string.Empty;
+
+            //verificar se o ficheiro esta selecionado ou nao 
+            if (FileUpload1.HasFile)
+            {
+                try
+                {
+                    string[] allowdFile = { ".xlsx" };
+
+                    //verificar se e outro tipo de ficheiro 
+                    string FileExt = System.IO.Path.GetExtension(FileUpload1.PostedFile.FileName);
+
+                    //verificar se o ficheiro selecionado tem uma extensao valida
+                    bool isValidFile = allowdFile.Contains(FileExt);
+
+                    if (!isValidFile)
+                    {
+                        LabelTexto.ForeColor = System.Drawing.Color.Red;
+                        LabelTexto.Text = "Por Favor selecione um ficheiro excel!";
+                    }
+                    else
+                    {
+
+                        //descobrir o tamanho do ficheiro selecionado 
+                        int FileSize = FileUpload1.PostedFile.ContentLength;
+                        if (FileSize <= 1048576) // 1048576 byte = 1MB
+                        {
+
+
+                            //apanhar o nome do ficheiro selecionado
+                            FileName = Path.GetFileName(Server.MapPath(FileUpload1.FileName));
+
+                            //salvar o ficheiro selecionado no servidor local
+                            FileUpload1.SaveAs(Server.MapPath(FilePath) + FileName);
+
+                            //apanhar o filepath
+                            string filePath = Server.MapPath(FilePath) + FileName;
+
+                            //abrir a conexao com o excel
+                            OleDbConnection con = null;
+
+                            if (FileExt == ".xlsx")
+                            {
+                                con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties= Excel 8.0;");
+                            }
+
+                            con.Open();
+                            //extrair a lista do sheet do excel
+                            System.Data.DataTable dt = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+
+                            //extrair o nome do primeiro sheet
+                            string getExcelSheetName = dt.Rows[0]["Table_Name"].ToString();
+
+                            //selecionar as rows do primeiro sheet do excel e mandar para o dataset
+                            OleDbCommand ExcelCommand = new OleDbCommand(@"SELECT * FROM [" + getExcelSheetName + @"]", con);
+                            OleDbDataAdapter ExcelAdapter = new OleDbDataAdapter(ExcelCommand);
+                            DataSet ExcelDataSet = new DataSet();
+
+                            ExcelAdapter.Fill(ExcelDataSet);
+                            con.Close();
+
+                            //por o dataset na tabela 
+                            GridView1.DataSource = ExcelDataSet;
+                            GridView1.DataBind();
+
+                            //Esconder buttons
+                            ButtonAdicionarInfo.Visible = true;
+                            ButtonExcel.Visible = false;
+                            LabelTexto.Text = "";
+                            GridView1.Visible = true;
+
+                        }
+                        else
+                        {
+                            LabelTexto.ForeColor = System.Drawing.Color.Red;
+                            LabelTexto.Text = "	Tamanho do ficheiro selecionado superior a 1MB!";
+                        }
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LabelTexto.Text = "Erro: " + ex.Message;
+                }
+            }
+            else
+            {
+                LabelTexto.Text = "Por favor selecione um ficheiro!";
+            }
+        }
+
+        protected void ButtonAdicionarInfo_Click(object sender, EventArgs e)
+        {
+            panelExcel.Visible = true;
+            panelDoente.Visible = false;
+            ButtonExcel.Visible = true;
+            ButtonAdicionarInfo.Visible = false;
+            for (int i = 0; i < GridView1.Rows.Count - 1; i++)
+            {
+                conexao.Open();
+                comando.CommandText = "INSERT INTO Dados_Biometricos(ID_Doente, Valor_Biometrico)VALUES('" + Convert.ToInt32(GridView1.Rows[i].Cells[0].Text) + "', '" + Convert.ToDecimal(GridView1.Rows[i].Cells[1].Text) + "')";
+                comando.ExecuteNonQuery();
+                conexao.Close();
             }
         }
     }

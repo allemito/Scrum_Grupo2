@@ -84,6 +84,7 @@ namespace scrum_Grupo2_website
             {
                 while (dataReader.Read())
                 {
+                    ListBox_Questionarios.Items.Clear();
                     ListBox_Questionarios.Items.Add(dataReader[0].ToString());
                 }
             }
