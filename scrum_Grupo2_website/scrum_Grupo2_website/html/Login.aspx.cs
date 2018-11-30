@@ -15,12 +15,13 @@ namespace scrum_Grupo2_website.html
         OracleConnection conexao = new OracleConnection("DATA SOURCE=25.15.145.193:1521/xe;PASSWORD=scrumdatabase;USER ID=SCRUM_GRUPO2_DATABASE");
         OracleCommand comando = new OracleCommand();
         OracleDataReader dataReader;
+        string username;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             comando.Connection = conexao;
         }
-   
+
         protected void btn_login_account_Click(object sender, EventArgs e)
         {
             conexao.Open();
@@ -77,6 +78,9 @@ namespace scrum_Grupo2_website.html
                         string passwordDoente = Convert.ToString(comando.ExecuteScalar());
                         if (txtbox_password.Text == passwordDoente && txtbox_password.Text != "")
                         {
+                            comando.CommandText = "Select ID_Doente from Doente WHERE Numero_Utente = '"+userDoente+"'";
+                            username = Convert.ToString(comando.ExecuteScalar());
+                            Session["username"] = username;
                             Response.Redirect("~/html/Doente.aspx");
                             conexao.Close();
                         }
