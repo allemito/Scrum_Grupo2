@@ -452,5 +452,41 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonAdicionarQuestao;
+        
+        /// <summary>
+        /// panel_QuestionarioOpcoes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_QuestionarioOpcoes;
+        
+        /// <summary>
+        /// ButtonAddQuestionario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAddQuestionario;
+        
+        /// <summary>
+        /// ListBox_Questionarios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBox_Questionarios;
+        
+        /// <summary>
+        /// ButtonRemoverQuestionario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRemoverQuestionario;
     }
 }

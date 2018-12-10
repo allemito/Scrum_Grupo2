@@ -21,7 +21,7 @@
         </ul>
         <ul class="med">
             <asp:Button class="btnmed" ID="ButtonRecolha" runat="server" Text="Recolha Dados" Width ="150px" UseSubmitBehavior="False" OnClick="ButtonRecolha_Click"/>
-            <asp:Button class="btnmed" ID="btn_Questionario" runat="server" Text="Questionários" Width ="150px" UseSubmitBehavior="False"/>
+            <asp:Button class="btnmed" ID="btn_Questionario" runat="server" Text="Questionários" Width ="150px" UseSubmitBehavior="False" OnClick="btn_Questionario_Click"/>
             <asp:Button class="btnmed" ID="ButtonProcurar" runat="server" Text="Procurar" Width ="150px" OnClick="ButtonProcurar_Click"/> 
             <asp:TextBox type="text" ID="TextBox_Procurar" runat="server" placeholder="Número de Utente" name="numero_utente" Width ="150px"></asp:TextBox>   
             <asp:label ID="labelProcurar" runat="server" Width ="150px" style="text-align:center" ForeColor="Red"><b></b></asp:label>          

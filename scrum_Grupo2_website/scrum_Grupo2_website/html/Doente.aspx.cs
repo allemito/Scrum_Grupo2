@@ -69,6 +69,7 @@ namespace scrum_Grupo2_website
             DropDownListSatisfacao.Visible = false;
             DropDownListSimNao.Visible = false;
             TextBoxAberta.Visible = false;
+            
 
             numero_questao = 1;
             ViewState["numero_questao"] = numero_questao;
@@ -77,14 +78,15 @@ namespace scrum_Grupo2_website
 
             // Mete na listBox os questionarios disponiveis para responder
             conexao.Open();
-            comando.CommandText = "SELECT Nome_Questionario from QUESTIONARIO_PERGUNTAS group by NOME_QUESTIONARIO";
+            comando.CommandText = "select nome_questionario from (select nome_questionario from questionario order by NOME_QUESTIONARIO asc) where nome_questionario not in (select nome_questionario from RESPOSTAS_QUESTIONARIO inner join questionario on respostas_questionario.id_questionario = questionario.ID_QUESTIONARIO inner join doente on doente.ID_DOENTE = RESPOSTAS_QUESTIONARIO.ID_DOENTE where doente.id_doente = '"+username+"')";
             dataReader = comando.ExecuteReader();
 
             if (dataReader.HasRows)
             {
+                ListBox_Questionarios.Items.Clear();
                 while (dataReader.Read())
                 {
-                    ListBox_Questionarios.Items.Clear();
+                    
                     ListBox_Questionarios.Items.Add(dataReader[0].ToString());
                 }
             }
@@ -93,7 +95,6 @@ namespace scrum_Grupo2_website
 
         protected void button_Comecar_Click(object sender, EventArgs e)
         {
-            button_Seguinte.Visible = false;
             panel_procura.Visible = false;
             panel_questionario.Visible = true;
             DropDownListFrequencia.Visible = false;
@@ -107,10 +108,10 @@ namespace scrum_Grupo2_website
 
              //Encontra o valor maximo de perguntas do questionario 
             conexao.Open();
-            comando.CommandText = "SELECT count(Numero_Questao) from QUESTIONARIO_PERGUNTAS where NOME_QUESTIONARIO ='" + questionario_selectionado + "'";
+            comando.CommandText = "select count(Numero_Questao) from questionario inner join questionario_pergunta on questionario.id_questionario = questionario_pergunta.id_questionario where nome_questionario ='" + questionario_selectionado + "'";
             numero_max = Convert.ToInt32(comando.ExecuteScalar());
             ViewState["numero_max"] = numero_max;
-            comando.CommandText = "SELECT ID_Questionario from QUESTIONARIO_PERGUNTAS where NOME_QUESTIONARIO ='" + questionario_selectionado + "'";
+            comando.CommandText = "SELECT ID_Questionario from questionario where NOME_QUESTIONARIO ='" + questionario_selectionado + "'";
             id_questionario = Convert.ToString(comando.ExecuteScalar());
             ViewState["id_questionario"] = id_questionario;
             conexao.Close();
@@ -121,9 +122,9 @@ namespace scrum_Grupo2_website
                  string tipoResposta;
                  conexao.Open();
                  labelNome_Questionario.Text = "Nome do Questionário: "+ questionario_selectionado;
-                 comando.CommandText = "SELECT QUESTAO from QUESTIONARIO_PERGUNTAS where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and NOME_QUESTIONARIO = '" + questionario_selectionado + "'";
+                 comando.CommandText = "SELECT QUESTAO from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and ID_QUESTIONARIO = '" + id_questionario + "'";
                  labelQuestao.Text = "Questão " + numero_questao + ": " + Convert.ToString(comando.ExecuteScalar());
-                 comando.CommandText = "SELECT Tipo_Resposta from QUESTIONARIO_PERGUNTAS where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and NOME_QUESTIONARIO = '" + questionario_selectionado + "'";
+                 comando.CommandText = "SELECT Tipo_Resposta from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and ID_QUESTIONARIO = '" + id_questionario + "'";
                  tipoResposta = Convert.ToString(comando.ExecuteScalar());
                  if (tipoResposta == "Resposta Satisfação")
                  {
@@ -159,72 +160,15 @@ namespace scrum_Grupo2_website
 
         protected void button_Seguinte_Click(object sender, EventArgs e)
         {
-            buttonSubmeter.Visible = true;
-            button_Seguinte.Visible = false;
-
-            //Incrementa o numero da resposta
-            numero_questao++;
-            ViewState["numero_questao"] = numero_questao;
-            labelNome_Questionario.Text = "Nome do Questionário: " + questionario_selectionado;
-            panel_procura.Visible = false;
-            panel_questionario.Visible = true;
-
-            // Começa a receber as perguntas para serem respondidas
-            if (numero_questao <= numero_max)
-            {
-                string tipoResposta;
-                conexao.Open();
-                comando.CommandText = "SELECT QUESTAO from QUESTIONARIO_PERGUNTAS where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and NOME_QUESTIONARIO = '" + questionario_selectionado + "'";
-                labelQuestao.Text = "Questão " + numero_questao + ": " + Convert.ToString(comando.ExecuteScalar());
-                comando.CommandText = "SELECT Tipo_Resposta from QUESTIONARIO_PERGUNTAS where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and NOME_QUESTIONARIO = '" + questionario_selectionado + "'";
-                tipoResposta = Convert.ToString(comando.ExecuteScalar());
-
-                if (tipoResposta == "Resposta Satisfação")
-                {
-                    DropDownListFrequencia.Visible = false;
-                    DropDownListSatisfacao.Visible = true;
-                    DropDownListSimNao.Visible = false;
-                    TextBoxAberta.Visible = false;
-                }
-                else if (tipoResposta == "Resposta Aberta")
-                {
-                    DropDownListFrequencia.Visible = false;
-                    DropDownListSatisfacao.Visible = false;
-                    DropDownListSimNao.Visible = false;
-                    TextBoxAberta.Visible = true;
-                }
-                else if (tipoResposta == "Resposta Sim/Não")
-                {
-                    DropDownListFrequencia.Visible = false;
-                    DropDownListSatisfacao.Visible = false;
-                    DropDownListSimNao.Visible = true;
-                    TextBoxAberta.Visible = false;
-                }
-                else if (tipoResposta == "Resposta Frequência")
-                {
-                    DropDownListFrequencia.Visible = true;
-                    DropDownListSatisfacao.Visible = false;
-                    DropDownListSimNao.Visible = false;
-                    TextBoxAberta.Visible = false;
-                }
-                conexao.Close();
-            }
-        }
-
-        protected void buttonSubmeter_Click(object sender, EventArgs e)
-        {
             panel_procura.Visible = false;
             panel_questionario.Visible = true;
             string tipoResposta;
             conexao.Open();
-            comando.CommandText = "SELECT Tipo_Resposta from QUESTIONARIO_PERGUNTAS where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and NOME_QUESTIONARIO = '" + questionario_selectionado + "'";
+            comando.CommandText = "SELECT Tipo_Resposta from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and ID_QUESTIONARIO = '" + id_questionario + "'";
             tipoResposta = Convert.ToString(comando.ExecuteScalar());
 
-            if(numero_questao == numero_max)
+            if (numero_questao == numero_max)
             {
-                buttonSubmeter.Visible = false;
-                button_Seguinte.Visible = false;
-
                 if (tipoResposta == "Resposta Frequência")
                 {
                     DropDownListFrequencia.Visible = true;
@@ -293,9 +237,6 @@ namespace scrum_Grupo2_website
             }
             else
             {
-                buttonSubmeter.Visible = false;
-                button_Seguinte.Visible = true;
-
                 if (tipoResposta == "Resposta Frequência")
                 {
                     DropDownListFrequencia.Visible = true;
@@ -310,7 +251,6 @@ namespace scrum_Grupo2_website
                     //Limpar 
                     DropDownListFrequencia.ClearSelection();
                     DropDownListFrequencia.Visible = false;
-                    labelQuestao.Text = "Resposta Submetida";
                 }
                 else if (tipoResposta == "Resposta Sim/Não")
                 {
@@ -326,7 +266,6 @@ namespace scrum_Grupo2_website
                     //Limpar
                     DropDownListSimNao.ClearSelection();
                     DropDownListSimNao.Visible = false;
-                    labelQuestao.Text = "Resposta Submetida";
 
                 }
                 else if (tipoResposta == "Resposta Aberta")
@@ -343,7 +282,6 @@ namespace scrum_Grupo2_website
                     //Limpar
                     TextBoxAberta.Text = "";
                     TextBoxAberta.Visible = false;
-                    labelQuestao.Text = "Resposta Submetida";
                 }
                 else if (tipoResposta == "Resposta Satisfação")
                 {
@@ -359,14 +297,62 @@ namespace scrum_Grupo2_website
                     //Limpar
                     DropDownListSatisfacao.ClearSelection();
                     DropDownListSatisfacao.Visible = false;
-                    labelQuestao.Text = "Resposta Submetida";
                 }
 
             }
 
-            
 
-            
+
+            // PASSAR PARA A PERGUNTA SEGUINTE //
+
+            //Incrementa o numero da resposta
+            numero_questao++;
+            ViewState["numero_questao"] = numero_questao;
+            labelNome_Questionario.Text = "Nome do Questionário: " + questionario_selectionado;
+            panel_procura.Visible = false;
+            panel_questionario.Visible = true;
+
+            // Começa a receber as perguntas para serem respondidas
+            if (numero_questao <= numero_max)
+            {
+                string tipoResposta1;
+                conexao.Open();
+                labelNome_Questionario.Text = "Nome do Questionário: " + questionario_selectionado;
+                comando.CommandText = "SELECT QUESTAO from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and ID_QUESTIONARIO = '" + id_questionario + "'";
+                labelQuestao.Text = "Questão " + numero_questao + ": " + Convert.ToString(comando.ExecuteScalar());
+                comando.CommandText = "SELECT Tipo_Resposta from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '" + "Questão-" + numero_questao + "' and ID_QUESTIONARIO = '" + id_questionario + "'";
+                tipoResposta1 = Convert.ToString(comando.ExecuteScalar());
+
+                if (tipoResposta1 == "Resposta Satisfação")
+                {
+                    DropDownListFrequencia.Visible = false;
+                    DropDownListSatisfacao.Visible = true;
+                    DropDownListSimNao.Visible = false;
+                    TextBoxAberta.Visible = false;
+                }
+                else if (tipoResposta1 == "Resposta Aberta")
+                {
+                    DropDownListFrequencia.Visible = false;
+                    DropDownListSatisfacao.Visible = false;
+                    DropDownListSimNao.Visible = false;
+                    TextBoxAberta.Visible = true;
+                }
+                else if (tipoResposta1 == "Resposta Sim/Não")
+                {
+                    DropDownListFrequencia.Visible = false;
+                    DropDownListSatisfacao.Visible = false;
+                    DropDownListSimNao.Visible = true;
+                    TextBoxAberta.Visible = false;
+                }
+                else if (tipoResposta1 == "Resposta Frequência")
+                {
+                    DropDownListFrequencia.Visible = true;
+                    DropDownListSatisfacao.Visible = false;
+                    DropDownListSimNao.Visible = false;
+                    TextBoxAberta.Visible = false;
+                }
+                conexao.Close();
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ namespace scrum_Grupo2_website.html
         Registo registo = new Registo();
         int numero_pergunta = 1;
         int novoID = 0;
+        string questionario_selectionado;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +27,7 @@ namespace scrum_Grupo2_website.html
             panelMedico.Visible = false;
             panelInfo_Socio.Visible = false;
             panelQuestionario.Visible = false;
+            panel_QuestionarioOpcoes.Visible = false;
             labelProcurar.Text = "";
 
             labelQuestionario.Text = "Questão-" + numero_pergunta;
@@ -38,6 +40,10 @@ namespace scrum_Grupo2_website.html
                 if (ViewState["novoID"] != null)
                 {
                     novoID = (int)ViewState["novoID"];
+                }
+                if (ViewState["nome_questionario"] != null)
+                {
+                    questionario_selectionado = (string)ViewState["nome_questionario"];
                 }
             }
         }
@@ -260,7 +266,32 @@ namespace scrum_Grupo2_website.html
             panelDoente.Visible = false;
             panelMedico.Visible = false;
             panelInfo_Socio.Visible = false;
+            panelQuestionario.Visible = false;
+            panel_QuestionarioOpcoes.Visible = true;
+
+            conexao.Open();
+            comando.CommandText = "Select nome_questionario from questionario order by nome_questionario asc";
+            dataReader = comando.ExecuteReader();
+
+            if (dataReader.HasRows)
+            {
+                ListBox_Questionarios.Items.Clear();
+                while (dataReader.Read())
+                {
+
+                    ListBox_Questionarios.Items.Add(dataReader[0].ToString());
+                }
+            }
+            conexao.Close();
+        }
+
+        protected void ButtonAddQuestionario_Click(object sender, EventArgs e)
+        {
+            panelDoente.Visible = false;
+            panelMedico.Visible = false;
+            panelInfo_Socio.Visible = false;
             panelQuestionario.Visible = true;
+            panel_QuestionarioOpcoes.Visible = false;
             TextBoxNomeQuestionario.Text = "";
 
             // Dar Reset ao numero das questoes
@@ -269,7 +300,7 @@ namespace scrum_Grupo2_website.html
             try
             {
                 conexao.Open();
-                comando.CommandText = "SELECT MAX(ID_Questionario)+1 from Questionario_Perguntas";
+                comando.CommandText = "SELECT MAX(ID_Questionario)+1 from Questionario";
                 comando.ExecuteNonQuery();
                 novoID = Convert.ToInt32(comando.ExecuteScalar());
                 conexao.Close();
@@ -282,6 +313,49 @@ namespace scrum_Grupo2_website.html
             }
         }
 
+        protected void ButtonRemoverQuestionario_Click(object sender, EventArgs e)
+        {
+            panelDoente.Visible = false;
+            panelMedico.Visible = false;
+            panelInfo_Socio.Visible = false;
+            panelQuestionario.Visible = false;
+            panel_QuestionarioOpcoes.Visible = true;
+
+            try
+            {
+                questionario_selectionado = ListBox_Questionarios.SelectedItem.Value.ToString();
+                ViewState["nome_questionario"] = questionario_selectionado;
+
+                //Apaga o Questionario que estiver selecionado
+                conexao.Open();
+                comando.CommandText = "Delete from Respostas_Questionario Where ID_Questionario = (Select ID_Questionario from Questionario Where nome_questionario = '" + questionario_selectionado + "')";
+                comando.ExecuteNonQuery();
+                comando.CommandText = "Delete from Questionario_Pergunta Where ID_Questionario = (Select ID_Questionario from Questionario Where nome_questionario = '" + questionario_selectionado + "')";
+                comando.ExecuteNonQuery();
+                comando.CommandText = "Delete from Questionario Where Nome_Questionario = '" + questionario_selectionado + "'";
+                comando.ExecuteNonQuery();
+
+                //Dá Refresh na ListBox para que nao apareça o questionario que foi apagado (Trocar por metodo mais simples se for encontrado)
+                comando.CommandText = "Select nome_questionario from questionario order by nome_questionario asc";
+                dataReader = comando.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    ListBox_Questionarios.Items.Clear();
+                    while (dataReader.Read())
+                    {
+
+                        ListBox_Questionarios.Items.Add(dataReader[0].ToString());
+                    }
+                }
+                conexao.Close();
+            }
+            catch (System.NullReferenceException)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, selecione um Questionário para remover!');", true);
+            }
+        }
+
         protected void ButtonAdicionarQuestionario_Click(object sender, EventArgs e)
         {
             //Colocar Panel visiveis e invisiveis
@@ -290,26 +364,57 @@ namespace scrum_Grupo2_website.html
             panelInfo_Socio.Visible = false;
             panelQuestionario.Visible = true;
 
-            if(TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
+            if (numero_pergunta == 1)
             {
-                string numero_questao = ("Questão-" + numero_pergunta).ToString();
-                conexao.Open();
-                comando.CommandText = "INSERT INTO Questionario_Perguntas(ID_Questionario, Nome_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('"+novoID+"', '"+TextBoxNomeQuestionario.Text+"', '"+numero_questao+"', '"+TextBoxPergunta.Text+"', '"+DropDownListTipoPergunta.Text+"')";
-                comando.ExecuteNonQuery();
-                conexao.Close();
+                if (TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
+                {
+                    string numero_questao = ("Questão-" + numero_pergunta).ToString();
+                    conexao.Open();
+                    comando.CommandText = "INSERT INTO Questionario(ID_Questionario, Nome_Questionario)VALUES('" + novoID + "', '" + TextBoxNomeQuestionario.Text + "')";
+                    comando.ExecuteNonQuery();
+                    comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
+                    comando.ExecuteNonQuery();
+                    conexao.Close();
 
-                //Limpar Pergunta anterior para passar para a proxima
-                TextBoxPergunta.Text = "";
-                DropDownListTipoPergunta.ClearSelection();
+                    //Limpar Pergunta anterior para passar para a proxima
+                    TextBoxPergunta.Text = "";
+                    DropDownListTipoPergunta.ClearSelection();
 
-                //Incrementar o numero da pergunta
-                numero_pergunta++;
-                ViewState["count"] = numero_pergunta;
-                labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                    //Incrementar o numero da pergunta
+                    numero_pergunta++;
+                    ViewState["count"] = numero_pergunta;
+                    labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                }
+
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                if (TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
+                {
+                    string numero_questao = ("Questão-" + numero_pergunta).ToString();
+                    conexao.Open();
+                    comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
+                    comando.ExecuteNonQuery();
+                    conexao.Close();
+
+                    //Limpar Pergunta anterior para passar para a proxima
+                    TextBoxPergunta.Text = "";
+                    DropDownListTipoPergunta.ClearSelection();
+
+                    //Incrementar o numero da pergunta
+                    numero_pergunta++;
+                    ViewState["count"] = numero_pergunta;
+                    labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                }
+
             }
         }
     }

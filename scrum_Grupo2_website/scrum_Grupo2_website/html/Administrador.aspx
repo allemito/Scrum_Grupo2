@@ -152,6 +152,12 @@
                  </asp:DropDownList></p>
                  <asp:Button type="submit" ID="ButtonAdicionarQuestao" class="registerbtn" runat="server" Text="Adicionar Questão" OnClick="ButtonAdicionarQuestionario_Click"/>
             </asp:Panel>
+            <asp:Panel ID ="panel_QuestionarioOpcoes" runat ="server">
+                <p><asp:Button class="button" ID="ButtonAddQuestionario" runat="server" Text="Adicionar Questionário" Width="217px" OnClick="ButtonAddQuestionario_Click"/></p>
+                <label><b>Questionários Disponiveis:</b></label>
+                <p><asp:ListBox ID="ListBox_Questionarios" runat="server" Height="150px" Width="217px"></asp:ListBox></p>    
+                <p><asp:Button class="button" ID="ButtonRemoverQuestionario" runat="server" Text="Remover Questionário" Width="217px" OnClick="ButtonRemoverQuestionario_Click"/></p>
+            </asp:Panel>
         </div>
     </form>
 </body>

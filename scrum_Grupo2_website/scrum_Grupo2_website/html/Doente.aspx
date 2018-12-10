@@ -17,7 +17,7 @@
             <asp:Button class="button" ID="btn_contactos" runat="server" Text="Contactos" PostBackUrl="~/html/Contactos.aspx" UseSubmitBehavior="False"/>
      </ul>
      <ul class="leftbar">
-            <asp:Button class="buttonleftbar" ID="btn_Questionario" runat="server" Text="Questionários" Width ="150px" UseSubmitBehavior="False" OnClick="btn_Questionario_Click"/>        
+            <asp:Button class="buttonleftbar" ID="btn_Questionario" runat="server" Text="Questionários" Width ="150px" UseSubmitBehavior="False" OnClick="btn_Questionario_Click"/>    
     </ul>
         <div style="height: 590px; margin-left:150px; padding: 20px; border-color: lightseagreen; width: auto;">
        <asp:Panel ID ="panel_procura" runat ="server">
@@ -46,7 +46,6 @@
                <asp:ListItem>Sempre</asp:ListItem>
            </asp:DropDownList></p>
            <asp:TextBox type="text" ID="TextBoxAberta" runat="server" placeholder="Resposta" name="resposta"></asp:TextBox>
-           <p><asp:Button class="button" ID="buttonSubmeter" runat="server" Width="217px" Text="Submeter Questão" OnClick="buttonSubmeter_Click"/></p>
            <p><asp:Button class="button" ID="button_Seguinte" runat="server" Width="217px" Text="Próxima Questão" OnClick="button_Seguinte_Click"/></p>
        </asp:Panel>
     </div>

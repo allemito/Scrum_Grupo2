@@ -289,10 +289,15 @@ namespace scrum_Grupo2_website
             for (int i = 0; i < GridView1.Rows.Count - 1; i++)
             {
                 conexao.Open();
-                comando.CommandText = "INSERT INTO Dados_Biometricos(ID_Doente, Valor_Biometrico)VALUES('" + Convert.ToInt32(GridView1.Rows[i].Cells[0].Text) + "', '" + Convert.ToDecimal(GridView1.Rows[i].Cells[1].Text) + "')";
+                comando.CommandText = "INSERT INTO Dados_Biometricos(ID_Doente, Valor_Biometrico, ID_Dado)VALUES('" + Convert.ToInt32(GridView1.Rows[i].Cells[0].Text) + "', '" + Convert.ToDecimal(GridView1.Rows[i].Cells[1].Text) + "', '"+(i + 1)+"')";
                 comando.ExecuteNonQuery();
                 conexao.Close();
             }
+        }
+
+        protected void btn_Questionario_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
