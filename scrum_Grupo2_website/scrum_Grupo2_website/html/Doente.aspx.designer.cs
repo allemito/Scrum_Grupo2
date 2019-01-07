@@ -130,6 +130,15 @@ namespace scrum_Grupo2_website {
         protected global::System.Web.UI.WebControls.DropDownList DropDownListSimNao;
         
         /// <summary>
+        /// DropDownListRespostaManual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListRespostaManual;
+        
+        /// <summary>
         /// DropDownListSatisfacao control.
         /// </summary>
         /// <remarks>
@@ -157,6 +166,15 @@ namespace scrum_Grupo2_website {
         protected global::System.Web.UI.WebControls.TextBox TextBoxAberta;
         
         /// <summary>
+        /// button_Anterior control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button button_Anterior;
+        
+        /// <summary>
         /// button_Seguinte control.
         /// </summary>
         /// <remarks>
@@ -164,5 +182,14 @@ namespace scrum_Grupo2_website {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button button_Seguinte;
+        
+        /// <summary>
+        /// buttonConcluir control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonConcluir;
     }
 }

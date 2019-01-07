@@ -445,6 +445,51 @@ namespace scrum_Grupo2_website.html {
         protected global::System.Web.UI.WebControls.DropDownList DropDownListTipoPergunta;
         
         /// <summary>
+        /// TextBoxAdicionarResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxAdicionarResposta;
+        
+        /// <summary>
+        /// ButtonAddResp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAddResp;
+        
+        /// <summary>
+        /// ButtonRemoveResp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonRemoveResp;
+        
+        /// <summary>
+        /// ListBoxOpcoesResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxOpcoesResposta;
+        
+        /// <summary>
+        /// ButtonEditarQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonEditarQuestao;
+        
+        /// <summary>
         /// ButtonAdicionarQuestao control.
         /// </summary>
         /// <remarks>
@@ -452,6 +497,15 @@ namespace scrum_Grupo2_website.html {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonAdicionarQuestao;
+        
+        /// <summary>
+        /// LabelConfirmacao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelConfirmacao;
         
         /// <summary>
         /// panel_QuestionarioOpcoes control.

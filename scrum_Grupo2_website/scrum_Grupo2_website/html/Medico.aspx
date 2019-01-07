@@ -28,6 +28,7 @@
         </ul>
         <div style="height: 590px; margin-left:150px; padding: 20px; border-color: lightseagreen; width: auto;">
             <asp:Panel ID ="panelDoente" runat ="server">
+                <asp:Button class="button" ID="ButtonVoltar1" runat="server" Text="Voltar" Width="217px" OnClick="ButtonVoltar1_Click"/>
                 <h1>Informação Médica</h1>
                 <label><b>Nome:</b></label>
                 <asp:TextBox type="text" ID="TextBox_Nome" runat="server" placeholder="Nome" name="nome"></asp:TextBox>
@@ -94,6 +95,53 @@
                 <HeaderStyle BackColor="#6699ff" BorderColor="#333333" BorderStyle="Solid" BorderWidth="1px" VerticalAlign="Top" Wrap="true" />
                 </asp:GridView></p>          
             </asp:Panel>
+             <asp:Panel ID ="panelBotoes" runat ="server">
+                 <asp:Button class="button" ID="Button_dados" runat="server" Text="Dados Biométricos" OnClick="Button_dados_Click" Width="217px" />
+                 &nbsp;&nbsp;
+                 <asp:Button class="button" ID="ButtonInformacaoCli" runat="server" Text="Informação Clínica" Width="217px" OnClick="ButtonInformacaoCli_Click"/>              
+            </asp:Panel>
+             <asp:Panel ID ="panelDadosBiometricos" runat ="server">
+                 <asp:Button class="button" ID="ButtonVoltar2" runat="server" Text="Voltar" Width="217px" OnClick="ButtonVoltar2_Click" />
+                 
+                 <p><label><b>Nome:</b></label>
+                 <asp:TextBox type="text" ID="TextBoxNome1" runat="server" placeholder="Nome" name="nome"></asp:TextBox></p>
+                 <p>
+                    <asp:ListBox ID="ListBox_valores" runat="server" Height="200px"></asp:ListBox>
+                    <asp:Label ID="Label_verificacao_valores" runat="server" Text="Label" ForeColor="Red"></asp:Label>
+                </p>                 
+            </asp:Panel>
+            <asp:Panel ID ="panel_QuestionarioOpcoes" runat ="server">
+                <p><asp:Button class="button" ID="ButtonAddQuestionario" runat="server" Text="Adicionar Questionário" Width="217px" OnClick="ButtonAddQuestionario_Click"/></p>
+                <label><b>Questionários Disponiveis:</b></label>
+                <p><asp:ListBox ID="ListBox_Questionarios" runat="server" Height="150px" Width="217px"></asp:ListBox></p>    
+                <p><asp:Button class="button" ID="ButtonRemoverQuestionario" runat="server" Text="Remover Questionário" Width="217px" OnClick="ButtonRemoverQuestionario_Click"/></p>
+            </asp:Panel>
+            <asp:Panel ID ="panelQuestionario" runat ="server">
+                 <h1>Inserção de Questionarios</h1>
+                <label><b>Nome do Questionário:</b></label>
+                <asp:TextBox type="text" ID="TextBoxNomeQuestionario" runat="server" placeholder="Adicione um nome ao questionário" name="nome"></asp:TextBox>
+                 <p><asp:label ID="labelQuestionario" runat="server"><b>Questão</b></asp:label></p>
+                 <asp:TextBox type="text" ID="TextBoxPergunta" runat="server" placeholder="Adicione uma pergunta" name="Pergunta"></asp:TextBox>
+                 <label><b>Selecione o tipo de resposta pretendida:</b></label>
+                 <p><asp:DropDownList ID="DropDownListTipoPergunta" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListTipoPergunta_SelectedIndexChanged">
+                     <asp:ListItem>Resposta Aberta</asp:ListItem>   
+                     <asp:ListItem>Resposta Sim/Não</asp:ListItem>    
+                     <asp:ListItem>Resposta Frequência</asp:ListItem> 
+                     <asp:ListItem>Resposta Satisfação</asp:ListItem>   
+                     <asp:ListItem>Adicionar Manualmente</asp:ListItem>
+                 </asp:DropDownList></p>
+                 <asp:TextBox type="text" ID="TextBoxAdicionarResposta" runat="server" placeholder="Adicione uma resposta" name="nome"></asp:TextBox>
+                 <asp:Button class="button" ID="ButtonAddResp" runat="server" Text="Adicionar" Width="217px" OnClick="ButtonAddResp_Click"/>
+                 &nbsp;
+                 <asp:Button ID="ButtonRemoveResp" runat="server" class="button" OnClick="ButtonRemoveResp_Click" Text="Remover" Width="217px" />
+                 <p>
+                     <asp:ListBox ID="ListBoxOpcoesResposta" runat="server" Height="150px" Width="217px"></asp:ListBox>
+                 </p>
+                 <asp:Button ID="ButtonEditarQuestao" runat="server" class="button" OnClick="ButtonEditarQuestao_Click" Text="Questão Anterior" Width="217px" />
+                 &nbsp;
+                <asp:Button class="button" ID="ButtonAdicionarQuestao" runat="server" Text="Próxima Questão" Width="217px" OnClick="ButtonAdicionarQuestionario_Click"/>
+                <p><asp:Label ID="LabelConfirmacao" runat="server" Text=""></asp:Label></p>  
+            </asp:Panel>           
         </div>
     </form>
 </body>

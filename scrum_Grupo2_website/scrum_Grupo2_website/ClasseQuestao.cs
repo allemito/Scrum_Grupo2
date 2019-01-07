@@ -48,5 +48,12 @@ namespace scrum_Grupo2_website
             novaDrop.Items.Add("Completamente Satisfeito");
             novoPanel.Controls.Add(novaDrop);
         }
+
+        public void QuestaoManual(System.Web.UI.WebControls.Panel novoPanel, string questao)
+        {
+            DropDownList novaDrop = new DropDownList();
+            novaDrop.ID = questao;
+            novoPanel.Controls.Add(novaDrop);
+        }
     }
 }

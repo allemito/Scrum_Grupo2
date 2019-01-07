@@ -28,10 +28,14 @@
            <asp:label ID="labelNome_Questionario" runat="server"><b>Nome-Questionario</b></asp:label>
            <p><asp:label ID="labelQuestao" runat="server"><b>Questão</b></asp:label></p>
            <p><asp:DropDownList ID="DropDownListSimNao" runat="server">
+               <asp:ListItem></asp:ListItem>
                <asp:ListItem>Sim</asp:ListItem>
                <asp:ListItem>Não</asp:ListItem>
            </asp:DropDownList></p>
+           <p><asp:DropDownList ID="DropDownListRespostaManual" runat="server">
+           </asp:DropDownList></p>
            <p><asp:DropDownList ID="DropDownListSatisfacao" runat="server">
+               <asp:ListItem></asp:ListItem>
                <asp:ListItem>Nada Satisfeito</asp:ListItem>
                <asp:ListItem>Pouco Satisfeito</asp:ListItem>
                <asp:ListItem>Satisfeito</asp:ListItem>
@@ -39,6 +43,7 @@
                <asp:ListItem>Completamente Satisfeito</asp:ListItem>
            </asp:DropDownList></p>
            <p><asp:DropDownList ID="DropDownListFrequencia" runat="server">
+               <asp:ListItem></asp:ListItem>
                <asp:ListItem>Nunca</asp:ListItem>
                <asp:ListItem>Raramente</asp:ListItem>
                <asp:ListItem>Algumas Vezes</asp:ListItem>
@@ -46,7 +51,13 @@
                <asp:ListItem>Sempre</asp:ListItem>
            </asp:DropDownList></p>
            <asp:TextBox type="text" ID="TextBoxAberta" runat="server" placeholder="Resposta" name="resposta"></asp:TextBox>
-           <p><asp:Button class="button" ID="button_Seguinte" runat="server" Width="217px" Text="Próxima Questão" OnClick="button_Seguinte_Click"/></p>
+           <p>
+               <asp:Button class="button" ID="button_Anterior" runat="server" Width="217px" Text="Questão Anterior" OnClick="button_Anterior_Click" />
+               &nbsp;
+               <asp:Button class="button" ID="button_Seguinte" runat="server" Width="217px" Text="Próxima Questão" OnClick="button_Seguinte_Click"/> 
+               &nbsp;
+               <asp:Button class="button" ID="buttonConcluir" runat="server" Width="217px" Text="Terminar Questionário" OnClick="buttonConcluir_Click"/>          
+           </p>
        </asp:Panel>
     </div>
     </form>

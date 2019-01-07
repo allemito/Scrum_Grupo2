@@ -144,13 +144,24 @@
                  <p><asp:label ID="labelQuestionario" runat="server"><b>Questão</b></asp:label></p>
                  <asp:TextBox type="text" ID="TextBoxPergunta" runat="server" placeholder="Adicione uma pergunta" name="Pergunta"></asp:TextBox>
                  <label><b>Selecione o tipo de resposta pretendida:</b></label>
-                 <p><asp:DropDownList ID="DropDownListTipoPergunta" runat="server">
+                 <p><asp:DropDownList ID="DropDownListTipoPergunta" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListTipoPergunta_SelectedIndexChanged">
                      <asp:ListItem>Resposta Aberta</asp:ListItem>   
                      <asp:ListItem>Resposta Sim/Não</asp:ListItem>    
                      <asp:ListItem>Resposta Frequência</asp:ListItem> 
                      <asp:ListItem>Resposta Satisfação</asp:ListItem>   
+                     <asp:ListItem>Adicionar Manualmente</asp:ListItem>
                  </asp:DropDownList></p>
-                 <asp:Button type="submit" ID="ButtonAdicionarQuestao" class="registerbtn" runat="server" Text="Adicionar Questão" OnClick="ButtonAdicionarQuestionario_Click"/>
+                 <asp:TextBox type="text" ID="TextBoxAdicionarResposta" runat="server" placeholder="Adicione uma resposta" name="nome"></asp:TextBox>
+                 <asp:Button class="button" ID="ButtonAddResp" runat="server" Text="Adicionar" Width="217px" OnClick="ButtonAddResp_Click"/>
+                 &nbsp;
+                 <asp:Button ID="ButtonRemoveResp" runat="server" class="button" OnClick="ButtonRemoveResp_Click" Text="Remover" Width="217px" />
+                 <p>
+                     <asp:ListBox ID="ListBoxOpcoesResposta" runat="server" Height="150px" Width="217px"></asp:ListBox>
+                 </p>
+                 <asp:Button ID="ButtonEditarQuestao" runat="server" class="button" OnClick="ButtonEditarQuestao_Click" Text="Questão Anterior" Width="217px" />
+                 &nbsp;
+                <asp:Button class="button" ID="ButtonAdicionarQuestao" runat="server" Text="Próxima Questão" Width="217px" OnClick="ButtonAdicionarQuestionario_Click"/>
+                <p><asp:Label ID="LabelConfirmacao" runat="server" Text=""></asp:Label></p>  
             </asp:Panel>
             <asp:Panel ID ="panel_QuestionarioOpcoes" runat ="server">
                 <p><asp:Button class="button" ID="ButtonAddQuestionario" runat="server" Text="Adicionar Questionário" Width="217px" OnClick="ButtonAddQuestionario_Click"/></p>

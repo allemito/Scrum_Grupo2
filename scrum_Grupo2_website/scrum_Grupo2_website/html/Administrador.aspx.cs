@@ -23,12 +23,19 @@ namespace scrum_Grupo2_website.html
         protected void Page_Load(object sender, EventArgs e)
         {
             comando.Connection = conexao;
+
             panelDoente.Visible = false;
             panelMedico.Visible = false;
             panelInfo_Socio.Visible = false;
             panelQuestionario.Visible = false;
             panel_QuestionarioOpcoes.Visible = false;
+
+            LabelConfirmacao.Visible = false;
             labelProcurar.Text = "";
+            ListBoxOpcoesResposta.Visible = false;
+            TextBoxAdicionarResposta.Visible = false;
+            ButtonAddResp.Visible = false;
+            ButtonRemoveResp.Visible = false;
 
             labelQuestionario.Text = "Questão-" + numero_pergunta;
             if (IsPostBack)
@@ -292,7 +299,10 @@ namespace scrum_Grupo2_website.html
             panelInfo_Socio.Visible = false;
             panelQuestionario.Visible = true;
             panel_QuestionarioOpcoes.Visible = false;
+            ButtonEditarQuestao.Visible = false;
             TextBoxNomeQuestionario.Text = "";
+            TextBoxPergunta.Text = "";
+            DropDownListTipoPergunta.ClearSelection();
 
             // Dar Reset ao numero das questoes
             numero_pergunta = 1;
@@ -328,6 +338,8 @@ namespace scrum_Grupo2_website.html
 
                 //Apaga o Questionario que estiver selecionado
                 conexao.Open();
+                comando.CommandText = "Delete from TipoResposta Where ID_QUESTIONARIO = (Select id_questionario from questionario where nome_questionario = '" + questionario_selectionado + "')";
+                comando.ExecuteNonQuery();
                 comando.CommandText = "Delete from Respostas_Questionario Where ID_Questionario = (Select ID_Questionario from Questionario Where nome_questionario = '" + questionario_selectionado + "')";
                 comando.ExecuteNonQuery();
                 comando.CommandText = "Delete from Questionario_Pergunta Where ID_Questionario = (Select ID_Questionario from Questionario Where nome_questionario = '" + questionario_selectionado + "')";
@@ -338,10 +350,10 @@ namespace scrum_Grupo2_website.html
                 //Dá Refresh na ListBox para que nao apareça o questionario que foi apagado (Trocar por metodo mais simples se for encontrado)
                 comando.CommandText = "Select nome_questionario from questionario order by nome_questionario asc";
                 dataReader = comando.ExecuteReader();
+                ListBox_Questionarios.Items.Clear();
 
                 if (dataReader.HasRows)
-                {
-                    ListBox_Questionarios.Items.Clear();
+                {                 
                     while (dataReader.Read())
                     {
 
@@ -363,58 +375,494 @@ namespace scrum_Grupo2_website.html
             panelMedico.Visible = false;
             panelInfo_Socio.Visible = false;
             panelQuestionario.Visible = true;
+            ButtonEditarQuestao.Visible = true;
 
-            if (numero_pergunta == 1)
+            string verificarquestao = "";
+            string questao_editar = ("Questão-" + numero_pergunta).ToString();
+            conexao.Open();
+            comando.CommandText = "select questao from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '"+questao_editar+"' and ID_QUESTIONARIO = '"+novoID+"'";
+            verificarquestao = Convert.ToString(comando.ExecuteScalar());
+            conexao.Close();
+            
+            if (verificarquestao == "")
             {
-                if (TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
+                if (numero_pergunta == 1)
                 {
-                    string numero_questao = ("Questão-" + numero_pergunta).ToString();
-                    conexao.Open();
-                    comando.CommandText = "INSERT INTO Questionario(ID_Questionario, Nome_Questionario)VALUES('" + novoID + "', '" + TextBoxNomeQuestionario.Text + "')";
-                    comando.ExecuteNonQuery();
-                    comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
-                    comando.ExecuteNonQuery();
-                    conexao.Close();
+                    ButtonEditarQuestao.Visible = true;
+                    if (TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
+                    {
+                        string questionarioexistente;
 
-                    //Limpar Pergunta anterior para passar para a proxima
-                    TextBoxPergunta.Text = "";
-                    DropDownListTipoPergunta.ClearSelection();
+                        conexao.Open();
+                        comando.CommandText = "Select Nome_Questionario From Questionario Where Nome_Questionario = '" + TextBoxNomeQuestionario.Text + "'";
+                        questionarioexistente = Convert.ToString(comando.ExecuteScalar());
+                        conexao.Close();
 
-                    //Incrementar o numero da pergunta
-                    numero_pergunta++;
-                    ViewState["count"] = numero_pergunta;
-                    labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                        if (questionarioexistente == "")
+                        {
+                            string numero_questao = ("Questão-" + numero_pergunta).ToString();
+
+                            if (DropDownListTipoPergunta.Text == "Adicionar Manualmente")
+                            {
+                                conexao.Open();
+                                comando.CommandText = "INSERT INTO Questionario(ID_Questionario, Nome_Questionario)VALUES('" + novoID + "', '" + TextBoxNomeQuestionario.Text + "')";
+                                comando.ExecuteNonQuery();
+                                comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
+                                comando.ExecuteNonQuery();
+                                if (ListBoxOpcoesResposta.Items.Count >= 2)
+                                {
+                                    for (int i = 0; i < ListBoxOpcoesResposta.Items.Count; i++)
+                                    {
+                                        comando.CommandText = "INSERT INTO TipoResposta(ID_Questionario, Numero_Questao, Nome_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + ListBoxOpcoesResposta.Items[i].Text + "')";
+                                        comando.ExecuteNonQuery();
+                                    }
+                                    conexao.Close();
+
+                                    //Limpar Pergunta anterior para passar para a proxima
+                                    TextBoxPergunta.Text = "";
+                                    DropDownListTipoPergunta.ClearSelection();
+                                    ListBoxOpcoesResposta.Items.Clear();
+                                    TextBoxAdicionarResposta.Text = "";
+
+                                    //Incrementar o numero da pergunta
+                                    numero_pergunta++;
+                                    ViewState["count"] = numero_pergunta;
+                                    labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                                }
+                                else
+                                {
+                                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, adicione mais opções de resposta!');", true);
+                                    ViewState["count"] = numero_pergunta;
+                                    labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                                    ListBoxOpcoesResposta.Visible = true;
+                                    ButtonAddResp.Visible = true;
+                                    ButtonRemoveResp.Visible = true;
+                                    TextBoxAdicionarResposta.Visible = true;
+                                }
+
+                            }
+                            else
+                            {
+                                conexao.Open();
+                                comando.CommandText = "INSERT INTO Questionario(ID_Questionario, Nome_Questionario)VALUES('" + novoID + "', '" + TextBoxNomeQuestionario.Text + "')";
+                                comando.ExecuteNonQuery();
+                                comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
+                                comando.ExecuteNonQuery();
+                                conexao.Close();
+
+                                //Limpar Pergunta anterior para passar para a proxima
+                                TextBoxPergunta.Text = "";
+                                DropDownListTipoPergunta.ClearSelection();
+
+                                //Incrementar o numero da pergunta
+                                numero_pergunta++;
+                                ViewState["count"] = numero_pergunta;
+                                labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                            }
+                        }
+                        else
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Nome de Questionario já existente, por favor escolha outro nome!');", true);
+                            ViewState["count"] = numero_pergunta;
+                            labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                        }
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                        ViewState["count"] = numero_pergunta;
+                        labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                    }
+
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                    ButtonEditarQuestao.Visible = true;
+                    if (TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
+                    {
+                        string numero_questao = ("Questão-" + numero_pergunta).ToString();
+
+                        if (DropDownListTipoPergunta.Text == "Adicionar Manualmente")
+                        {
+                            conexao.Open();
+                            comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
+                            comando.ExecuteNonQuery();
+                            
+                            if(ListBoxOpcoesResposta.Items.Count >= 2)
+                            {
+                                for (int i = 0; i < ListBoxOpcoesResposta.Items.Count; i++)
+                                {
+                                    comando.CommandText = "INSERT INTO TipoResposta(ID_Questionario, Numero_Questao, Nome_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + ListBoxOpcoesResposta.Items[i].Text + "')";
+                                    comando.ExecuteNonQuery();
+                                }
+                                conexao.Close();
+
+                                //Limpar Pergunta anterior para passar para a proxima
+                                TextBoxPergunta.Text = "";
+                                DropDownListTipoPergunta.ClearSelection();
+                                ListBoxOpcoesResposta.Items.Clear();
+                                TextBoxAdicionarResposta.Text = "";
+
+                                //Incrementar o numero da pergunta
+                                numero_pergunta++;
+                                ViewState["count"] = numero_pergunta;
+                                labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                            }
+                            else
+                            {
+                                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, adicione mais opções de resposta!');", true);
+                                ViewState["count"] = numero_pergunta;
+                                labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                                ListBoxOpcoesResposta.Visible = true;
+                                ButtonAddResp.Visible = true;
+                                ButtonRemoveResp.Visible = true;
+                                TextBoxAdicionarResposta.Visible = true;
+                            }
+                        }
+                        else
+                        {
+                            conexao.Open();
+                            comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
+                            comando.ExecuteNonQuery();
+                            conexao.Close();
+
+                            //Limpar Pergunta anterior para passar para a proxima
+                            TextBoxPergunta.Text = "";
+                            DropDownListTipoPergunta.ClearSelection();
+
+                            //Incrementar o numero da pergunta
+                            numero_pergunta++;
+                            ViewState["count"] = numero_pergunta;
+                            labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                        }
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                        ViewState["count"] = numero_pergunta;
+                        labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                    }
                 }
 
+                LabelConfirmacao.Visible = true;
+                LabelConfirmacao.Text = "Questão-" + (numero_pergunta - 1) + " submetida com sucesso, para terminar o questionário apenas saia deste!";
             }
             else
             {
                 if (TextBoxNomeQuestionario.Text != "" && TextBoxPergunta.Text != "")
                 {
                     string numero_questao = ("Questão-" + numero_pergunta).ToString();
-                    conexao.Open();
-                    comando.CommandText = "INSERT INTO Questionario_Pergunta(ID_Questionario, Numero_Questao, Questao, Tipo_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + TextBoxPergunta.Text + "', '" + DropDownListTipoPergunta.Text + "')";
-                    comando.ExecuteNonQuery();
-                    conexao.Close();
 
-                    //Limpar Pergunta anterior para passar para a proxima
-                    TextBoxPergunta.Text = "";
-                    DropDownListTipoPergunta.ClearSelection();
+                    if (DropDownListTipoPergunta.Text == "Adicionar Manualmente")
+                    {
+                        conexao.Open();
+                        comando.CommandText = "UPDATE QUESTIONARIO_PERGUNTA SET QUESTAO = '" + TextBoxPergunta.Text + "', TIPO_RESPOSTA = '" + DropDownListTipoPergunta.Text + "' where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao + "'";
+                        comando.ExecuteNonQuery();
+                        
+                        if(ListBoxOpcoesResposta.Items.Count >= 2)
+                        {
+                            comando.CommandText = "Delete from TipoResposta Where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao + "'";
+                            comando.ExecuteNonQuery();
+                            for (int i = 0; i < ListBoxOpcoesResposta.Items.Count; i++)
+                            {
+                                comando.CommandText = "INSERT INTO TipoResposta(ID_Questionario, Numero_Questao, Nome_Resposta)VALUES('" + novoID + "', '" + numero_questao + "', '" + ListBoxOpcoesResposta.Items[i].Text + "')";
+                                comando.ExecuteNonQuery();
+                            }
+                            conexao.Close();
 
-                    //Incrementar o numero da pergunta
-                    numero_pergunta++;
-                    ViewState["count"] = numero_pergunta;
-                    labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                            //Limpar Pergunta anterior para passar para a proxima
+                            TextBoxPergunta.Text = "";
+                            DropDownListTipoPergunta.ClearSelection();
+                            ListBoxOpcoesResposta.Items.Clear();
+                            TextBoxAdicionarResposta.Text = "";
+
+                            //Incrementar o numero da pergunta
+                            numero_pergunta++;
+                            ViewState["count"] = numero_pergunta;
+                            labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+
+                            string verificarquestao1;
+                            string proximaquestao = ("Questão-" + numero_pergunta).ToString();
+
+                            conexao.Open();
+                            comando.CommandText = "select questao from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '" + proximaquestao + "' and ID_QUESTIONARIO = '" + novoID + "'";
+                            verificarquestao1 = Convert.ToString(comando.ExecuteScalar());
+                            conexao.Close();
+                            if (verificarquestao1 == "")
+                            {
+
+                            }
+                            else
+                            {
+                                string numero_questao1 = ("Questão-" + numero_pergunta).ToString();
+                                conexao.Open();
+                                comando.CommandText = "Select Questao From Questionario_Pergunta where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao1 + "'";
+                                TextBoxPergunta.Text = Convert.ToString(comando.ExecuteScalar());
+                                comando.CommandText = "Select Tipo_Resposta From Questionario_Pergunta where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao1 + "'";
+                                DropDownListTipoPergunta.Text = Convert.ToString(comando.ExecuteScalar());
+                                conexao.Close();
+
+                                if (DropDownListTipoPergunta.Text == "Adicionar Manualmente")
+                                {
+
+                                    ListBoxOpcoesResposta.Visible = true;
+                                    TextBoxAdicionarResposta.Visible = true;
+                                    ButtonAddResp.Visible = true;
+                                    ButtonRemoveResp.Visible = true;
+
+                                    conexao.Open();
+                                    comando.CommandText = "Select Nome_Resposta from TipoResposta Where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao1 + "'";
+                                    dataReader = comando.ExecuteReader();
+
+                                    if (dataReader.HasRows)
+                                    {
+                                        ListBoxOpcoesResposta.Items.Clear();
+                                        while (dataReader.Read())
+                                        {
+                                            ListBoxOpcoesResposta.Items.Add(dataReader[0].ToString());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Não existem valores adicionados!');", true);
+                                    }
+
+                                    conexao.Close();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, adicione mais opções de resposta!');", true);
+                            ViewState["count"] = numero_pergunta;
+                            labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+                            ListBoxOpcoesResposta.Visible = true;
+                            ButtonAddResp.Visible = true;
+                            ButtonRemoveResp.Visible = true;
+                            TextBoxAdicionarResposta.Visible = true;
+                        }
+
+                    }
+                    else
+                    {
+                        conexao.Open();
+                        comando.CommandText = "UPDATE QUESTIONARIO_PERGUNTA SET QUESTAO = '" + TextBoxPergunta.Text + "', TIPO_RESPOSTA = '" + DropDownListTipoPergunta.Text + "' where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao + "'";
+                        comando.ExecuteNonQuery();
+                        comando.CommandText = "Delete from TipoResposta Where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao + "'";
+                        comando.ExecuteNonQuery();
+                        conexao.Close();
+
+                        //Limpar Pergunta anterior para passar para a proxima
+                        TextBoxPergunta.Text = "";
+                        DropDownListTipoPergunta.ClearSelection();
+
+
+                        // PASSAR À PERGUNTA SEGUINTE
+
+
+                        //Incrementar o numero da pergunta
+                        numero_pergunta++;
+                        ViewState["count"] = numero_pergunta;
+                        labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+
+                        string verificarquestao1;
+                        string proximaquestao = ("Questão-" + numero_pergunta).ToString();
+
+                        conexao.Open();
+                        comando.CommandText = "select questao from QUESTIONARIO_PERGUNTA where NUMERO_QUESTAO = '" + proximaquestao + "' and ID_QUESTIONARIO = '" + novoID + "'";
+                        verificarquestao1 = Convert.ToString(comando.ExecuteScalar());
+                        conexao.Close();
+                        if (verificarquestao1 == "")
+                        {
+
+                        }
+                        else
+                        {
+                            string numero_questao1 = ("Questão-" + numero_pergunta).ToString();
+                            conexao.Open();
+                            comando.CommandText = "Select Questao From Questionario_Pergunta where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao1 + "'";
+                            TextBoxPergunta.Text = Convert.ToString(comando.ExecuteScalar());
+                            comando.CommandText = "Select Tipo_Resposta From Questionario_Pergunta where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao1 + "'";
+                            DropDownListTipoPergunta.Text = Convert.ToString(comando.ExecuteScalar());
+                            conexao.Close();
+
+                            if (DropDownListTipoPergunta.Text == "Adicionar Manualmente")
+                            {
+
+                                ListBoxOpcoesResposta.Visible = true;
+                                TextBoxAdicionarResposta.Visible = true;
+                                ButtonAddResp.Visible = true;
+                                ButtonRemoveResp.Visible = true;
+
+                                conexao.Open();
+                                comando.CommandText = "Select Nome_Resposta from TipoResposta Where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao1 + "'";
+                                dataReader = comando.ExecuteReader();
+
+                                if (dataReader.HasRows)
+                                {
+                                    ListBoxOpcoesResposta.Items.Clear();
+                                    while (dataReader.Read())
+                                    {
+                                        ListBoxOpcoesResposta.Items.Add(dataReader[0].ToString());
+                                    }
+                                }
+                                else
+                                {
+                                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Não existem valores adicionados!');", true);
+                                }
+
+                                conexao.Close();
+                            }
+                        }
+                    }              
                 }
                 else
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, preencha todos os campos!');", true);
+                    ViewState["count"] = numero_pergunta;
+                    labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
                 }
 
+                LabelConfirmacao.Visible = true;
+                LabelConfirmacao.Text = "Questão-" + (numero_pergunta - 1) + " alterada e submetida com sucesso, para terminar o questionário apenas saia deste!";
+            }        
+        }
+
+        protected void ButtonEditarQuestao_Click(object sender, EventArgs e)
+        {
+            //Colocar Panel visiveis e invisiveis
+            panelDoente.Visible = false;
+            panelMedico.Visible = false;
+            panelInfo_Socio.Visible = false;
+            panelQuestionario.Visible = true;
+         
+            numero_pergunta--;
+            ViewState["count"] = numero_pergunta;
+            labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+
+            string numero_questao = ("Questão-" + numero_pergunta).ToString();
+            conexao.Open();
+            comando.CommandText = "Select Questao From Questionario_Pergunta where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao + "'";
+            TextBoxPergunta.Text = Convert.ToString(comando.ExecuteScalar());
+            comando.CommandText = "Select Tipo_Resposta From Questionario_Pergunta where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao + "'";
+            DropDownListTipoPergunta.Text = Convert.ToString(comando.ExecuteScalar());
+            conexao.Close();
+
+            if (DropDownListTipoPergunta.Text == "Adicionar Manualmente")
+            {
+
+                ListBoxOpcoesResposta.Visible = true;
+                TextBoxAdicionarResposta.Visible = true;
+                ButtonAddResp.Visible = true;
+                ButtonRemoveResp.Visible = true;
+
+                conexao.Open();
+                comando.CommandText = "Select Nome_Resposta from TipoResposta Where ID_QUESTIONARIO = '" + novoID + "' and NUMERO_QUESTAO = '" + numero_questao + "'";
+                dataReader = comando.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    ListBoxOpcoesResposta.Items.Clear();
+                    while (dataReader.Read())
+                    {
+                        ListBoxOpcoesResposta.Items.Add(dataReader[0].ToString());
+                    }
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Não existem valores adicionados!');", true);
+                }
+
+                conexao.Close();
+            }
+            else
+            {
+                ListBoxOpcoesResposta.Items.Clear();
+            }
+
+            if (numero_pergunta == 1)
+            {
+                ButtonEditarQuestao.Visible = false;
+            }
+            else
+            {
+                ButtonEditarQuestao.Visible = true;
+            }
+
+
+            //Tentar fazer com que nao passe para antes da questao1
+        }
+
+        protected void DropDownListTipoPergunta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           if(DropDownListTipoPergunta.SelectedIndex == 4)
+            {
+                //Acrescentar as coisas à drop aqui
+                panelDoente.Visible = false;
+                panelMedico.Visible = false;
+                panelInfo_Socio.Visible = false;
+                panelQuestionario.Visible = true;
+                ViewState["count"] = numero_pergunta;
+                labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+
+                ListBoxOpcoesResposta.Visible = true;
+                TextBoxAdicionarResposta.Visible = true;
+                ButtonAddResp.Visible = true;
+                ButtonRemoveResp.Visible = true;
+            }
+            else
+            {
+                panelDoente.Visible = false;
+                panelMedico.Visible = false;
+                panelInfo_Socio.Visible = false;
+                panelQuestionario.Visible = true;
+                ViewState["count"] = numero_pergunta;
+                labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+
+                ListBoxOpcoesResposta.Visible = false;
+                TextBoxAdicionarResposta.Visible = false;
+                ButtonAddResp.Visible = false;
+                ButtonRemoveResp.Visible = false;
+                ListBoxOpcoesResposta.Items.Clear();
+                TextBoxAdicionarResposta.Text = "";
+            }
+        }
+
+        protected void ButtonAddResp_Click(object sender, EventArgs e)
+        {
+            panelQuestionario.Visible = true;
+            ListBoxOpcoesResposta.Visible = true;
+            TextBoxAdicionarResposta.Visible = true;
+            ButtonAddResp.Visible = true;
+            ButtonRemoveResp.Visible = true;
+
+            ListBoxOpcoesResposta.Items.Add(TextBoxAdicionarResposta.Text);
+            ViewState["count"] = numero_pergunta;
+            labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+
+            //Limpar textbox
+            TextBoxAdicionarResposta.Text = "";
+        }
+
+        protected void ButtonRemoveResp_Click(object sender, EventArgs e)
+        {
+            panelQuestionario.Visible = true;
+            ListBoxOpcoesResposta.Visible = true;
+            TextBoxAdicionarResposta.Visible = true;
+            ButtonAddResp.Visible = true;
+            ButtonRemoveResp.Visible = true;
+            ViewState["count"] = numero_pergunta;
+            labelQuestionario.Text = ("Questão-" + numero_pergunta).ToString();
+
+            try
+            {
+                int index;
+                index = ListBoxOpcoesResposta.SelectedIndex;
+                ListBoxOpcoesResposta.Items.RemoveAt(index);
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Por favor, selecione um item para remover');", true);
             }
         }
     }
